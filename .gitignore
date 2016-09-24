@@ -12,3 +12,5 @@
 /fflowsite/log
 /fflowsite/.idea
 *.swp
+
+/fflowsite/resources/public/js/compiled/

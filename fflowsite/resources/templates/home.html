@@ -1,14 +1,77 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="jumbotron">
-    <h1>Welcome to fflowsite</h1>
-    <p>Time to start building your site!</p>
-    <p><a class="btn btn-primary btn-lg" href="http://luminusweb.net">Learn more &raquo;</a></p>
-  </div>
 
-  <div class="row">
-    <div class="span12">
-    {{docs|markdown}}
+<div class="Hero u-container">
+    <div class="Hero-title u-textAlignCenter">
+        <h4>
+            Framer.js<i class="fa fa-heart Hero-loveIcon" aria-hidden="true"></i> Javascript on Windows
+        </h4>
     </div>
-  </div>
+    <div class="Hero-desc">
+        An editor, <span class="Hero-descPoint">FramerFlow</span>, for prototyping with Framer.js with ES6 JavaScript
+    </div>
+    <div class="Hero-image u-sizeFull">
+        <div class="Hero-imageLayoutRoot u-flexEmbed
+                    u-size6of12">
+            <div class="u-flexEmbedRatio--16by9"></div>
+            <div class="u-flexEmbedContent">
+
+            </div>
+        </div>
+    </div>
+    <div class="Hero-download">
+        <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA WINDOWS ONLY (64
+            BITS)</a>
+    </div>
+</div>
+
+<div class="Features">
+    <div class="Features-layoutRoot u-container">
+        <div class="Features-title u-sectionTitle">Features</div>
+        <div class="Features-desc">We have some exciting features for your prototyping.</div>
+        <div class="Features-items">
+            {% for item in features %}
+            <div class="FeatureItem u-size1of4">
+                <div class="FeatureItem-photo u-sizeFull u-flexEmbed">
+                    <div class="u-flexEmbedRatio"></div>
+                    <div class="u-flexEmbedContent FeatureItem-photoImageContent"
+                         style="background-image: {{item.img}}"></div>
+                </div>
+                <div class="FeatureItem-title">{{item.title}}</div>
+                <div class="FeatureItem-desc">{{item.desc}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="Features-learnMore">
+            <a class="Button Button--blue" href="/docs">LEARN MORE</a>
+        </div>
+    </div>
+</div>
+
+<div class="Promotion">
+    <div class="Promotion-layoutRoot u-container">
+        <div class="Promotion-verbiage
+                    u-size5of12 u-after1of12">
+            <div class="Promotion-title u-sectionTitle">FramerFlow for Windows</div>
+            <p>
+                Awesome FramerFlow for Windows let you give a power to
+                create beautiful prototype on Windows platform.
+            </p>
+            <p>
+                JavaScript ES6 is a thing to give you more comfortable and
+                powerful than ever before it was.
+            </p>
+            <p>
+                Download today and start your shiny prototyping with FramerFlow.
+            </p>
+            <div class="Promotion-download">
+                <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA WINDOWS ONLY (64
+                    BITS)</a>
+            </div>
+        </div>
+        <div class="u-size6of12 Promotion-photo">
+        </div>
+    </div>
+</div>
+
 {% endblock %}

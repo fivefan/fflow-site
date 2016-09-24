@@ -4,6 +4,8 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/core.match "0.3.0-alpha4"]
+
                  [selmer "1.0.9"]
                  [markdown-clj "0.9.89"]
                  [ring-middleware-format "0.7.0"]
@@ -22,7 +24,14 @@
                  [org.clojure/tools.cli "0.3.5"]
                  [luminus-nrepl "0.1.4"]
                  [org.webjars/webjars-locator-jboss-vfs "0.1.0"]
-                 [luminus-immutant "0.2.2"]]
+                 [luminus-immutant "0.2.2"]
+
+                 [facjure/mesh "0.4.0"]
+
+                 [figwheel-sidecar "0.5.7"]
+                 [org.clojure/clojurescript "1.8.51"
+                  :exclusions [org.apache.ant/ant]]
+                 ]
 
   :min-lein-version "2.0.0"
 
@@ -33,29 +42,68 @@
   :main fflowsite.core
 
   :plugins [[lein-cprop "1.0.1"]
-            [lein-immutant "2.1.0"]]
+            [lein-immutant "2.1.0"]
+            [lein-garden "0.3.0"]
+
+            [lein-figwheel "0.5.7"]
+            ]
 
   :profiles
-  {:uberjar {:omit-source true
-             :aot :all
-             :uberjar-name "fflowsite.jar"
-             :source-paths ["env/prod/clj"]
-             :resource-paths ["env/prod/resources"]}
+  {:uberjar       {:omit-source    true
+                   :aot            :all
+                   :uberjar-name   "fflowsite.jar"
+                   :source-paths   ["env/prod/clj"]
+                   :resource-paths ["env/prod/resources"]}
 
    :dev           [:project/dev :profiles/dev]
    :test          [:project/test :profiles/test]
 
-   :project/dev  {:dependencies [[prone "1.1.2"]
-                                 [ring/ring-mock "0.3.0"]
-                                 [ring/ring-devel "1.5.0"]
-                                 [pjstadig/humane-test-output "0.8.1"]]
-                  :plugins      [[com.jakemccrary/lein-test-refresh "0.14.0"]]
-                  
-                  :source-paths ["env/dev/clj" "test/clj"]
-                  :resource-paths ["env/dev/resources"]
-                  :repl-options {:init-ns user}
-                  :injections [(require 'pjstadig.humane-test-output)
-                               (pjstadig.humane-test-output/activate!)]}
-   :project/test {:resource-paths ["env/dev/resources" "env/test/resources"]}
-   :profiles/dev {}
-   :profiles/test {}})
+   :project/dev   {:dependencies   [[prone "1.1.2"]
+                                    [ring/ring-mock "0.3.0"]
+                                    [ring/ring-devel "1.5.0"]
+                                    [pjstadig/humane-test-output "0.8.1"]]
+                   :plugins        [[com.jakemccrary/lein-test-refresh "0.14.0"]]
+
+                   :source-paths   ["env/dev/clj" "test/clj"]
+                   :resource-paths ["env/dev/resources"]
+                   :repl-options   {:init-ns user}
+                   :injections     [(require 'pjstadig.humane-test-output)
+                                    (pjstadig.humane-test-output/activate!)]}
+   :project/test  {:resource-paths ["env/dev/resources" "env/test/resources"]}
+   :profiles/dev  {}
+   :profiles/test {}
+
+   }
+
+  :cljsbuild
+  {
+   :builds [{:id           "dev"
+             :source-paths ["src/cljs"]
+             :figwheel     true
+             :compiler     {:main                 "figwheeljs.core"
+                            :asset-path           "js/compiled/out"
+                            :output-to            "resources/public/js/compiled/figwheeljs.js"
+                            :output-dir           "resources/public/js/compiled/out"
+                            :source-map-timestamp true
+                            }
+             }]
+   }
+
+  :figwheel
+  {
+   :server-port 6502
+   :css-dirs    ["resources/public/css"]
+   }
+
+  :garden {:builds [{:id           "screen"
+                     :source-paths ["src_css"]
+                     :stylesheet   styles.styles/screen
+                     :compiler     {
+                                    :output-to     "resources/public/css/screen.css"
+                                    :pretty-print? true
+                                    }
+
+                     }]}
+
+  )
+

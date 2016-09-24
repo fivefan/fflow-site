@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <META name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to fflowsite</title>
 
+    <!-- For figwheel support -->
+
+    <script type="text/javascript" src="/js/compiled/sample.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=David+Libre|Open+Sans:400,800,700">
     <!-- styles -->
-    {% style "/assets/bootstrap/css/bootstrap.min.css" %}
+    {% style "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" %}
     {% style "/assets/font-awesome/css/font-awesome.min.css" %}
 
     {% style "/css/screen.css" %}
-  </head>
-  <body>
-      <!-- navbar -->
-      <nav class="navbar navbar-light bg-faded" role="navigation">
-          <button class="navbar-toggler hidden-sm-up"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapsing-navbar">
-              &#9776;
-          </button>
-          <div class="collapse navbar-toggleable-xs" id="collapsing-navbar">
-              <a class="navbar-brand" href="{{servlet-context}}/">fflowsite</a>
-              <ul class="nav navbar-nav">
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/"
-                         class="nav-link{% ifequal page "home.html" %} active{%endifequal%}">
-                      home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/about"
-                         class="nav-link{% ifequal page "about.html" %} active{%endifequal%}">
-                      about
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-
-    <div class="container">
-      {% block content %}
-      {% endblock %}
+</head>
+<body>
+<!-- navbar -->
+<nav class="Nav u-container" role="navigation">
+    <div class="Nav-logo">
+        <img src="img/fflow_logo.png">
+        <h5 class="Nav-title">FramerFlow</h5>
     </div>
+    <div class="Nav-links">
+        <a class="Nav-link LinkButton" href="/">HOME</a>
+        <a class="Nav-link LinkButton" href="/docs">DOCS</a>
+    </div>
+</nav>
 
-    <!-- scripts -->
-    {% script "/assets/jquery/jquery.min.js" %}
-    {% script "/assets/tether/dist/js/tether.min.js" %}
-    {% script "/assets/bootstrap/js/bootstrap.min.js" %}
-
-    <script type="text/javascript">
-      var context = "{{servlet-context}}";
-    </script>
-    {% block page-scripts %}
+<div class="container">
+    {% block content %}
     {% endblock %}
-  </body>
+</div>
+
+<footer class="Footer">
+    <div class="Footer-layoutRoot u-container">
+        <div class="Footer-company u-flex1">
+            FiveFan.com | All Rights Reserved
+        </div>
+        <div class="Footer-links">
+            <a class="Footer-link LinkButton" href="/docs">DOCS</a>
+            <a class="Footer-link LinkButton"
+                href="mailto://support@fivefan.com">CONTACT</a>
+        </div>
+    </div>
+</footer>
+
+<!-- scripts -->
+{% script "/assets/jquery/jquery.min.js" %}
+{% script "/assets/tether/dist/js/tether.min.js" %}
+
+<script type="text/javascript">
+    var context = "{{servlet-context}}";
+</script>
+{% block page-scripts %}
+{% endblock %}
+</body>
 </html>
