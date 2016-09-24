@@ -6,15 +6,21 @@
     <title>Welcome to fflowsite</title>
 
     <!-- For figwheel support -->
-
     <script type="text/javascript" src="/js/compiled/sample.js"></script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=David+Libre|Open+Sans:400,800,700">
+    <!-- Google fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=David+Libre|Open+Sans:400,800,700|Source+Code+Pro">
     <!-- styles -->
     {% style "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" %}
     {% style "/assets/font-awesome/css/font-awesome.min.css" %}
-
     {% style "/css/screen.css" %}
+
+    {% script "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" %}
+
+    {% block page-head %}
+    {% endblock %}
+
+
 </head>
 <body>
 <!-- navbar -->
@@ -34,6 +40,7 @@
     {% endblock %}
 </div>
 
+{% if not no-footer %}
 <footer class="Footer">
     <div class="Footer-layoutRoot u-container">
         <div class="Footer-company u-flex1">
@@ -46,9 +53,9 @@
         </div>
     </div>
 </footer>
+{% endif %}
 
 <!-- scripts -->
-{% script "/assets/jquery/jquery.min.js" %}
 {% script "/assets/tether/dist/js/tether.min.js" %}
 
 <script type="text/javascript">

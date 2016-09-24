@@ -1238,3 +1238,218 @@ p.small {
 .Footer-link {
   padding-left: 25.888479232788086px;
 }
+
+.Docs {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.Docs-layoutRoot {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+
+.Docs-menuBar {
+  position: relative;
+  width: 25% !important;
+}
+
+.Docs-menuBar.menubar.fixed {
+  position: fixed;
+  width: 100% !important;
+  overflow-y: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.Docs-menuBar.menubar.fixed .u-container {
+  height: 100vh;
+  position: relative;
+}
+
+.Docs-menuBar.menubar.fixed .Docs-menu {
+  width: 25%;
+  height: 100vh;
+  margin-right: 75%;
+  overflow-y: auto;
+}
+
+.Docs-menuBar.menubar.fixed .Docs-menu::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.Docs-menu li {
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.Docs-menu a, .Docs-menu a:visited {
+  text-decoration: none;
+  color: #2962ff;
+}
+
+.Docs-menu > ul {
+  padding-bottom: 25vh;
+}
+
+.Docs-menu li.level-2 {
+  margin-bottom: 0.5rem;
+}
+
+.Docs-menu a {
+  position: relative;
+  line-height: 1.5;
+}
+
+.Docs-menu a.level-1 {
+  font-weight: bold;
+  display: inline-block;
+  margin: 2rem 0 1rem 0;
+}
+
+.Docs-menu a.level-3 {
+  padding-left: 1.5rem;
+}
+
+.Docs-menu a.active {
+  color: #3F51B5;
+}
+
+.Docs-menu a.active:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  border-bottom: 4px solid #2962ff;
+}
+
+.Docs-menu a.level-3.active:after {
+  left: 1.5rem;
+}
+
+.Docs-content {
+  position: relative;
+}
+
+.Docs-menuBar.menubar.fixed + .Docs-content {
+  margin-left: 25%;
+}
+
+.Docs-content h1 {
+  font-size: 41.88833481165625px;
+  font-weight: bold;
+  line-height: 2;
+  padding: 41.88833481165625px 0;
+}
+
+.Docs-content h2 {
+  font-size: 29.888443127505127px;
+  font-weight: bold;
+  line-height: 2;
+  padding: 25.888479232788086px 0;
+}
+
+.Docs-content h3 {
+  font-size: 18.47211980819702px;
+  line-height: 3;
+  padding: 0;
+  font-weight: bold;
+}
+
+.Docs-content h4 {
+  font-size: 16px;
+  line-height: 2;
+  padding: 16px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #585858;
+}
+
+.Docs-content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.Docs-content p+ul, .Docs-content p+ol {
+  margin: 25.888479232788086px 2rem;
+}
+
+.Docs-content ul > li {
+  list-style-type: disc;
+}
+
+.Docs-content ol > li {
+  list-style-type: decimal;
+}
+
+.Docs-content ul, .Docs-content ol {
+  line-height: 1.5;
+}
+
+.Docs-content ul li, .Docs-content ol li {
+  padding-left: 25.888479232788086px;
+}
+
+.Docs-content a.button {
+  margin: 1rem 0 1.5rem 0;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 12.72137985226815px;
+  background-color: #2962ff;
+  letter-spacing: 1px;
+  border-radius: 41.88833481165625px;
+  display: inline-block;
+  color: white;
+}
+
+.Docs-content blockquote {
+  position: relative;
+  padding: 1rem;
+  margin: 16px 0;
+  color: #585858;
+}
+
+.Docs-content blockquote:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-left: 4px solid #90CAF9;
+}
+
+.Docs-content pre {
+  background-color: #E3F2FD;
+  border: 1px solid #90CAF9;
+  padding: 25.888479232788086px;
+  margin: 16px 0;
+  font-family: "Source Code Pro", monospace;
+  font-size: 16px;
+}
+
+.Docs-content p > code {
+  font-family: "Source Code Pro", monospace;
+  background-color: #E3F2FD;
+  border: 1px solid #90CAF9;
+  padding: 0 0.5rem;
+}
+
+.Docs-content li code {
+  font-family: "Source Code Pro", monospace;
+  background-color: #E3F2FD;
+  border: 1px solid #90CAF9;
+  padding: 0 0.5rem;
+}

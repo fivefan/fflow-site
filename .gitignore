@@ -14,3 +14,4 @@
 *.swp
 
 /fflowsite/resources/public/js/compiled/
+fflowsite/figwheel_server.log

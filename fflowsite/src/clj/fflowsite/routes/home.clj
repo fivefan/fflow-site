@@ -27,24 +27,7 @@
 
 (defn docs-page []
   (layout/render
-    "docs.html" {:docs     (-> "docs/docs.md" io/resource slurp)
-                 :features [{:title "ES6 JavaScript"
-                             :desc  "Just use your shiny JavaScript skill\nwith learning powerful ES6 features"
-                             :img   "url(/img/feature_javascript.png)"
-                             }
-                            {:title "Coding Tools"
-                             :desc  "Instant watch, built-in REPL\nsupport and many, many \nmodern editing features are\nwaiting for you"
-                             :img   "url(/img/feature_code.png)"
-                             }
-                            {:title "Design Tools"
-                             :desc  "Layer hierarchy, state simulation\nand inspection tools are give you\nbetter idea how things work"
-                             :img   "url(/img/feature_design.png)"
-                             }
-                            {:title "Share"
-                             :desc  "Mirroring, sharing and import/\nexport for better communication"
-                             :img   "url(/img/feature_share.png)"
-                             }
-                            ]}))
+    "docs.html" {:no-footer true}))
 
 (defn about-page []
   (layout/render "about.html"))

@@ -5,6 +5,8 @@
             [mesh.grid :as grid]
             [mesh.typography :as typo]
 
+            [clojure.pprint :refer [pprint]]
+
             )
 
   (:use [styles.base])
@@ -32,33 +34,44 @@
 
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def serif ["\"David Libre\"" "serif"])
+(def monospace ["\"Source Code Pro\"" "monospace"])
 
 (def color-fg-500 "#585858")
 (def color-fg-700 "#888888")
 (def color-fg-900 "#f8f8f8")
+
+(def color-primary-50 "#E3F2FD")
+(def color-primary-200 "#90CAF9")
 (def color-primary-500 "#2962ff")
 
 (def sizes
-  [
-   [:.u-sizeFull {:width (percent 100)}]
-   (mapv (fn [ncols]
-           (mapv (fn [idx]
-                   [[(keyword (format ".u-size%sof%s"
-                                      idx
-                                      ncols))
-                     {:width (percent (* idx (/ 100 ncols)))}]
-                    [(keyword (format ".u-before%sof%s"
-                                      idx ncols))
-                     {:padding-left (percent (* idx (/ 100 ncols)))}]
-                    [(keyword (format ".u-after%sof%s"
-                                      idx ncols))
-                     {:padding-right (percent (* idx (/ 100 ncols)))}]]
-                   )
-                 (range 1 (inc ncols))))
-         [2 3 4 6 8 12 24]
-         )
-   ]
+  (into
+    [[:.u-sizeFull {:width (percent 100)}]]
+    (mapcat (fn [ncols]
+              (mapcat (fn [idx]
+                        [[(keyword (format ".u-size%sof%s"
+                                           idx
+                                           ncols))
+                          {:width (percent (* idx (/ 100 ncols)))}]
+                         [(keyword (format ".u-before%sof%s"
+                                           idx ncols))
+                          {:padding-left (percent (* idx (/ 100 ncols)))}]
+                         [(keyword (format ".u-after%sof%s"
+                                           idx ncols))
+                          {:padding-right (percent (* idx (/ 100 ncols)))}]]
+                        )
+                      (range 1 (inc ncols))))
+            [2 3 4 6 8 12 24]
+            ))
   )
+(defn u-size
+  [k]
+  (->> sizes
+       (filter #(= (first %) k))
+       first
+       last)
+  )
+
 (def utils
   [
    [:.u-container {:max-width (px wrap-width)
@@ -138,20 +151,21 @@
   )
 
 
+(def ButtonProps {:display         :inline-block
+                  :padding         [[(ms 0.25) (ms 1)]]
+                  :border-radius   (ms 2)
+                  :font-weight     :bold
+                  :font-size       (ms -0.25)
+                  :text-decoration :none
+                  :letter-spacing  (px 1)
+                  :cursor          :pointer
+                  })
 (def Button
   [
-   [:.Button {:display         :inline-block
-              :padding         [[(ms 0.25) (ms 1)]]
-              :border-radius   (ms 2)
-              :font-weight     :bold
-              :font-size       (ms -0.25)
-              :text-decoration :none
-              :letter-spacing  (px 1)
-              :cursor          :pointer
-              }
-
+   [:.Button ButtonProps
     :.Button--blue {:background-color color-primary-500
-                    :color            :white}
+                    :color            :white
+                    }
     ]])
 
 (def LinkButton
@@ -289,6 +303,140 @@
    [:.Footer-link {:padding-left (ms 1)}]
    ])
 
+(def Docs
+  [
+   [:.Docs (++ (Flexbox))]
+   [:.Docs-layoutRoot (++ (Flexbox)
+                          {:position :relative})]
+   [:.Docs-menuBar (++ {:position :relative
+                        :width    "25% !important"})]
+   [:.Docs-menuBar.menubar.fixed {:position   :fixed
+                                  :width      "100% !important"
+                                  :overflow-y :hidden
+                                  :left       0
+                                  :right      0
+                                  :top        0
+                                  :bottom     0
+                                  }
+    [:.u-container {:height   :100vh
+                    :position :relative}]
+    [:.Docs-menu (++ (u-size :.u-size1of4)
+                     {:height       :100vh
+                      :margin-right (percent 75)
+                      :overflow-y   :auto}
+                     )
+     ["&::-webkit-scrollbar" {:width  (rem 0.5)
+                              :height (rem 0.5)}]]
+    ]
+
+   [:.Docs-menu [:li {:font-size   (rem 0.9)
+                      :line-height 1.25}]]
+   [:.Docs-menu [:a
+                 :a:visited {:text-decoration :none
+                             :color           color-primary-500}
+                 ]
+    ]
+   [:.Docs-menu [:> [:ul {:padding-bottom "25vh"}]]]
+
+   [:.Docs-menu
+    [:li.level-2 {:margin-bottom (rem 0.5)}]
+    [:a {:position    :relative
+         :line-height 1.5}]
+    [:a.level-1 {:font-weight :bold
+                 :display     :inline-block
+                 :margin      [[(rem 2) 0 (rem 1) 0]]}]
+    [:a.level-2]
+    [:a.level-3 {:padding-left (rem 1.5)}]
+
+    [:a.active {:color "#3F51B5"}]
+    [:a.active:after {:content       "\"\""
+                      :position      :absolute
+                      :left          0
+                      :right         0
+                      :bottom        (px -4)
+                      :border-bottom [[(px 4) :solid color-primary-500]]}]
+    [:a.level-3.active:after {:left (rem 1.5)}]
+    ]
+
+
+   [:.Docs-content {:position :relative}]
+   [".Docs-menuBar.menubar.fixed + .Docs-content" {:margin-left (percent 25)}]
+
+   [:.Docs-content
+    [:h1 {:font-size   (ms 2)
+          :font-weight :bold
+          :line-height 2
+          :padding     [[(ms 2) 0]]}]
+    [:h2 {:font-size   (ms 1.25)
+          :font-weight :bold
+          :line-height 2
+          :padding     [[(ms 1) 0]]
+          }]
+
+    [:h3 {:font-size   (ms 0.25)
+          :line-height 3
+          :padding     0
+          :font-weight :bold
+          }]
+
+    [:h4 {:font-size      (ms 0)
+          :line-height    2
+          :padding        [[(ms 0) 0]]
+          :font-weight    :bold
+          :text-transform :uppercase
+          :color          color-fg-500
+          }
+     ]
+
+    [:p {:font-size   (ms 0)
+         :line-height 1.5
+         }]
+    [:p+ul
+     :p+ol {:margin [[(ms 1) (rem 2)]
+                     ]}]]
+
+   [:.Docs-content [:ul [:> [:li {:list-style-type :disc}]]]]
+   [:.Docs-content [:ol [:> [:li {:list-style-type :decimal}]]]]
+   [:.Docs-content [:ul :ol {:line-height 1.5}]]
+   [:.Docs-content [:ul :ol [:li {:padding-left (ms 1)}]]]
+
+   [:.Docs-content [:a.button (++ ButtonProps
+                                  {:background-color color-primary-500
+                                   :color            :white
+                                   :padding          [[(rem 0.5) (rem 1)]]
+                                   :margin           [[(rem 1) 0 (rem 1.5) 0]]})
+                    ]]
+
+
+   [:.Docs-content [:blockquote {:position :relative
+                                 :padding  (rem 1)
+                                 :margin   [[(ms 0) 0]]
+                                 :color    color-fg-500}]
+    [:blockquote:before {:content     "\"\""
+                         :position    :absolute
+                         :left        0
+                         :top         0
+                         :bottom      0
+                         :border-left [[(px 4) :solid color-primary-200]]}]]
+
+   [:.Docs-content [:pre {:background-color color-primary-50
+                          :border           [[(px 1) :solid color-primary-200]]
+                          :padding          (ms 1)
+                          :margin           [[(ms 0) 0]]
+                          :font-family      monospace
+                          :font-size        (ms 0)
+                          }]]
+   (let [inline-code {:font-family      monospace
+                      :background-color color-primary-50
+                      :border           [[(px 1) :solid color-primary-200]]
+                      :padding          [[0 (rem 0.5)]]
+                      }]
+     [
+      [:.Docs-content [:p [:> [:code inline-code]]]]
+      [:.Docs-content [:li [:code inline-code]]]
+      ])
+   ])
+
 (defstyles
   screen
   [
@@ -306,6 +454,8 @@
    FeatureItem
    Promotion
    Footer
+
+   Docs
    ]
   )
 
