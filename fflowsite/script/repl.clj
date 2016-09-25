@@ -31,7 +31,8 @@
                         :files    files}))
 
 (defn handle-notification [watcher files]
-  (when-let [changed-files (not-empty (filter #(.endsWith % ".html") (map str files)))]
+  (when-let [changed-files (not-empty (filter #(or (.endsWith % ".html")
+                                                   (.endsWith % ".md")) (map str files)))]
     (let [figwheel-server (:figwheel-server watcher)
           sendable-files (map #(make-file %) changed-files)]
       (send-files figwheel-server sendable-files)
