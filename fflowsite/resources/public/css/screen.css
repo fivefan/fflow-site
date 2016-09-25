@@ -1346,18 +1346,26 @@ p.small {
   margin-left: 25%;
 }
 
+.Docs-content h1:first-child {
+  padding-top: 16px;
+}
+
 .Docs-content h1 {
   font-size: 41.88833481165625px;
   font-weight: bold;
   line-height: 2;
-  padding: 41.88833481165625px 0;
+  padding: 177.44050567441258px 0 25.888479232788086px;
 }
 
 .Docs-content h2 {
   font-size: 29.888443127505127px;
   font-weight: bold;
   line-height: 2;
-  padding: 25.888479232788086px 0;
+  padding: 41.88833481165625px 0 20.944239616394043px 0;
+}
+
+.Docs-content h1+h2 {
+  padding-top: 0;
 }
 
 .Docs-content h3 {
@@ -1381,6 +1389,10 @@ p.small {
   line-height: 1.5;
 }
 
+.Docs-content p+p {
+  margin-top: 25.888479232788086px;
+}
+
 .Docs-content p+ul, .Docs-content p+ol {
   margin: 25.888479232788086px 2rem;
 }
@@ -1399,6 +1411,7 @@ p.small {
 
 .Docs-content ul li, .Docs-content ol li {
   padding-left: 25.888479232788086px;
+  line-height: 29.888443127505127px;
 }
 
 .Docs-content a.button {
@@ -1413,6 +1426,11 @@ p.small {
   border-radius: 41.88833481165625px;
   display: inline-block;
   color: white;
+}
+
+.Docs-content img+i {
+  min-height: 5rem;
+  display: block;
 }
 
 .Docs-content blockquote {

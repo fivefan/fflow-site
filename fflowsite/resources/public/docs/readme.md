@@ -1,49 +1,70 @@
 # QUICK START
 
 ## Introduction
-A modern, powerful editor for building FramerJs powered prototype.
-FramerFlow, desktop application for Windows, provides great code and design features as followings:
+FramerFlow is an new editor that allows you to create a beautiful prototype
+faster and easier than ever before. The prototype is powered by awesome
+[Framer.js](http://framerjs.com). It uses vanilla Javascript as main 
+language so you may start a new project right away if you already know Javascript.
 
-* Framer.js fully integrated
-* Built-in supports regular JavaScript, ES6 and FlowType flavored syntax
-* Module system (CommonJs style)
-* Built-in console log/ REPL system
-* Intellisense powered by awesome [FlowType](https://flowtype.org)
-* Layer inspection tools
+FramerFlow is a desktop application for Windows platform. Current build only
+supports 64 bits OS. In this first preview release of FramerFlow, the application
+provides:
+
+* Framer.js fully integrated editor
+* Built-in supports regular ES6 Javascript including modules.
+* Layer inspection / state manipulation
+* Intellisense which is powered by [FlowType](https://flowtype.org)
+* Built-in console log/ REPL editor 
 * Inline watch
+* Share
 * Etc.
 
-## Getting ready
-FramerFlow is a powerful editor for building a beautiful prototype which is
-powered by FramerJs. It comes with built-in support for JavaScript, ES6 and FlowType flavored
-syntax(CoffeeScript is not supported in the current build).
+As you get started with the preview release, be sure to check the documentation.
+
+
+## Getting started
+Here's how to get started with FramerFlow
 
 ### Install
-Click following link and download packaging file. After downloading just run it.
+Download the preview release with the link. After downloads execute it.
 
-[DOWNLOAD SETUP >](http://www.google.com)
 
 > *CAUTION*
+> **Windows platform (64bits)** is required to start use the application. 
 >
-> **Windows platform** is only available. This is beta build so do it at your own risk.
->
 
+[DOWNLOAD SETUP >](https://release.framerflow.com/download)
 
+You will see the install processing window. It usually takes around 5~10 minutes
+to finish it. You will be ready to get started soon.
 
-If you do not want to install or installation causes some problems,
-here is zip link.  Download it and unzip somewhere.
-Simply run `framerflow.exe`.
+<img src="blank.png" class="lazy" width="472" height="312" data-src="http://resources.framerflow.com/assets/install-spinner.gif">
 
-[DOWNLOAD ZIP >](https://www.google.com)
+After install successfully done FramerFlow is automatically being launched.
+You are able to see the screen.
 
+<img src="blank.png" class="lazy" width="676" height="527" data-src="http://resources.framerflow.com/assets/framerflow00.png">
+<i></i>
 
-After successful install you should be able to see the initial screen.
+### User Interface
+Here we'll go through some of the basic UI elements of FramerFlow. Your typical workspace
+is just as following.
+
+<img src="blank.png" class="lazy" width="1015" height="606" data-src="http://resources.framerflow.com/assets/userinterface_overview.gif">
+
+* `Files` - manage and see your project files. Toggle is possible.
+* `Layers` - Understand how your layers are structured and inspect.
+* `Analysis` - Show any recommendation or potential risky parts of your code
+* `REPL` - You can try various thing just as you did in usual browser's console window
+* `Import` - Import assets from Photoshop. Only photoshop is possible.
+* `Note` - Describe brief description about your project.
+* `Share` - Share your prototype with other people. Sign-in required.
 
 ### Release Notes
-You can check the release notes at [here](http://www.google.com).
-
+N/A
 
 # USER GUIDE
+
 
 ## Start a new project
 
@@ -51,44 +72,39 @@ Starting a new project is simple and easy.
 
 1. Launch FramerFlow appliaction.
 2. Click File > New Project on the application menu.
-3. Enter project name and folder location in the project set-up dialog.
-4. Click OK.
+3. Enter project name and location then click OK.
 5. You can see very basic skeleton project code.
 
-<div>
-  video goes at here.
-</div>
+<img src="blank.png" class="lazy" width="824" height="642" data-src="http://resources.framerflow.com/assets/new_project.gif">
+<i></i>
 
 ### Notes on generated code
 
-The generated code looks somewhat different what you usually see with
-FramerStudio. FramerFlow uses **JavaScript** as main language for coding task.
-Actually the language is ES6 JavaScript with additional type annotation which
-is from FlowType.
+In the preview release some codes are mandatory and special to FramerFlow.
+The code starts with special comment.
 
 ```javascript
 /* @flow */
 ```
-First line starts with very strange and special comment. The comment is
-a sort of hint for FlowType system. FramerFlow heavily rely on flowtype
-for its **intellisense** and **static analysis**. When you type some
-keystrokes, the recomended list is almost from FlowType system. So the
-first line is a critical to get good intellisense. The same rule is applied
-when you are creating a module file. __Please put this very special comment
-in any files you're using except npm modules.__
+
+This strange comment is for FlowType which is core part of intellisense and
+code analysis in FramerFlow. In other words when you need some tooling
+don't forget to put the special hint at the very top of the each file. 
+Same approach is also applied to __module__ creation.
 
 
 ```javascript
 require("./framerflow.cfg");
 ```
-`framerflow.cfg` is auto generated file and has configurations for project
-such as device, background color and rotation and etc. The `require` call
-brings those configuration into a live.
 
-> Whenever you change device or background via FramerFlow, the file is
-> automatically generated.
+`require` is a function to import module (_FramerFlow fully supports node.js module system_).
+Here the application tries to import auto generated module file `framerflow.cfg`. 
+The file includes to set up basic environment 
+such as device type, zoom factor, rotation and background, etc.
 
-That's it. Other parts are plain JavaScript code.
+> Whenever you change device or background via FramerFlow UI, the file is
+> automatically generated and updated.
+
 
 
 ## Coding tools
@@ -100,32 +116,103 @@ FramerFlow has decent coding features to help you better.
 * REPL and Console
 * Flowtype's Static Analysis
 
-### ES6 with type annotation
+### ES6 - Overview
 ES6 is next version of JavaScript. Its expressive power is same with CoffeeScript
 in terms of simplicity, beauty. By adopting ES6 you can keep similar things
 when you do CoffeeScript codings.
 
-* `()=>{}` - Fat arrow possible for simple inline function or anonymouse function
-* `let` - Scoped variable definition.
-* `const` - Read-only variable. Great to simply magic number or for immutable things.
-*
+### ES6 - Fat Arrow
+`()=>{}`. Fat arrow is very shorthand form to define inline function or anonymous function.
+
+<img src="blank.png" class="lazy" width="607" height="508" data-src="http://resources.framerflow.com/assets/es6_fat_arrow.gif">
 
 
+Please check the code.
+```
+// Fat arrow.
+var f1 = ()=> {
+    console.log(`I'm f1:${Date.now()}`);
+    return true;
+};
+f1();
+```
 
+
+### ES6 - Scoped variable
+`let` finally takes care of very bad thing of Javascript.
+Following code is a very subtle problem. It is a source of many bugs.
+
+```
+var a = "San Francisco";
+{
+    var a = "Seattle";
+    console.log(a);
+}
+console.log(a);
+```
+The console log always prints `Seattle`. 
+
+You can easily fix the problem by changing `var` into `let`: 
+Check this.
+
+<img src="blank.png" class="lazy" width="607" height="508" data-src="http://resources.framerflow.com/assets/es6_let.gif">
+<i></i>
+
+### ES6 - Contant
+`const` provides read-only variable. Once you initialize value, you have 
+no right to change the value. 
+> Try program with `const` as many as you can,
+> your code would be much better in terms of simplicity and robusteness.
+> This is definitely an way to be awesome programmer. 
+
+<img src="blank.png" class="lazy" width="607" height="508" data-src="http://resources.framerflow.com/assets/es6_const.gif">
+
+``` 
+const IsFramerJsAwesome = true;
+IsFramerJsAwesome = false;
+```
+
+### ES6 - Destructuring and Template Strings
+`Destructuring` is a powerful concept. You can break thing into many small parts.
+This is time saver. `Template Strings` is a really handy tools for formatting
+strings.
+
+<img src="blank.png" class="lazy" width="607" height="508" data-src="http://resources.framerflow.com/assets/es6_destructuring.gif">
+
+```
+let cityInfo = {
+    country: "USA",
+    capital: "DC"
+};
+
+let {country, capital} = cityInfo;
+
+console.log(`${capital} is the capital of ${country}`)
+```
+
+Template string starts with backtick \` and is closed with backtick\`
 
 
 
 ### Modules
-Module is a basic building unit for complex, sophiscated project. If your problem is
-too big to solve at once, split it into smaller problems until you get a clear picture
-for solutions.
 
-FramerFlow basically supports CommonJs module. `require` is used to import module file
+Module is a great concept for building a program. If you design well, your modules
+can be used to place altogether. You can easily create a new module and use it
+inside your program. Here is simple example.
+
+<img src="blank.png" class="lazy" width="605" height="456" data-src="http://resources.framerflow.com/assets/codingtools_module.gif">
+<i></i>
+
+
+### Modules - Node.js 
+FramerFlow basically supports node.js module system. `require` is used to import module file
 into your project. If you use `npm` module, you can simply include by calling `require(module_name)`
 
 ```javascript
 require("lodash");
 ```
+
+
 If you have your own project's module, it should be included by using relative path
 against project root path.
 

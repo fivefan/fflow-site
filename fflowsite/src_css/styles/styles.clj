@@ -1,16 +1,16 @@
 (ns styles.styles
-  (:refer-clojure :exclude [rem])
-  (:require [garden.def :refer [defstylesheet defstyles]]
-            [garden.units :refer [px rem em percent]]
-            [mesh.grid :as grid]
-            [mesh.typography :as typo]
+    (:refer-clojure :exclude [rem])
+    (:require [garden.def :refer [defstylesheet defstyles]]
+      [garden.units :refer [px rem em percent]]
+      [mesh.grid :as grid]
+      [mesh.typography :as typo]
 
-            [clojure.pprint :refer [pprint]]
+      [clojure.pprint :refer [pprint]]
 
-            )
+      )
 
-  (:use [styles.base])
-  )
+    (:use [styles.base])
+    )
 
 
 (def gutter (px 28))
@@ -28,9 +28,9 @@
 
 (def ms
   (let [f (typo/modular-scale-fn 16 (:golden typo/scales))]
-    (fn [n]
-      (px (f n)))
-    ))
+       (fn [n]
+           (px (f n)))
+       ))
 
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def serif ["\"David Libre\"" "serif"])
@@ -48,29 +48,29 @@
   (into
     [[:.u-sizeFull {:width (percent 100)}]]
     (mapcat (fn [ncols]
-              (mapcat (fn [idx]
-                        [[(keyword (format ".u-size%sof%s"
-                                           idx
-                                           ncols))
-                          {:width (percent (* idx (/ 100 ncols)))}]
-                         [(keyword (format ".u-before%sof%s"
-                                           idx ncols))
-                          {:padding-left (percent (* idx (/ 100 ncols)))}]
-                         [(keyword (format ".u-after%sof%s"
-                                           idx ncols))
-                          {:padding-right (percent (* idx (/ 100 ncols)))}]]
-                        )
-                      (range 1 (inc ncols))))
+                (mapcat (fn [idx]
+                            [[(keyword (format ".u-size%sof%s"
+                                               idx
+                                               ncols))
+                              {:width (percent (* idx (/ 100 ncols)))}]
+                             [(keyword (format ".u-before%sof%s"
+                                               idx ncols))
+                              {:padding-left (percent (* idx (/ 100 ncols)))}]
+                             [(keyword (format ".u-after%sof%s"
+                                               idx ncols))
+                              {:padding-right (percent (* idx (/ 100 ncols)))}]]
+                            )
+                        (range 1 (inc ncols))))
             [2 3 4 6 8 12 24]
             ))
   )
 (defn u-size
-  [k]
-  (->> sizes
-       (filter #(= (first %) k))
-       first
-       last)
-  )
+      [k]
+      (->> sizes
+           (filter #(= (first %) k))
+           first
+           last)
+      )
 
 (def utils
   [
@@ -84,10 +84,10 @@
 
    [:.u-flexEmbedRatio (FlexEmbed-ratio 1 1)]
    (mapv (fn [[width-ratio height-ratio]]
-           [(keyword (format ".u-flexEmbedRatio--%sby%s"
-                             width-ratio height-ratio)
-                     )
-            (FlexEmbed-ratio width-ratio height-ratio)])
+             [(keyword (format ".u-flexEmbedRatio--%sby%s"
+                               width-ratio height-ratio)
+                       )
+              (FlexEmbed-ratio width-ratio height-ratio)])
          [[3 1]
           [2 1]
           [16 9]
@@ -362,16 +362,19 @@
    [:.Docs-content {:position :relative}]
    [".Docs-menuBar.menubar.fixed + .Docs-content" {:margin-left (percent 25)}]
 
+   [:.Docs-content [:h1:first-child {:padding-top (ms 0)}]]
    [:.Docs-content
     [:h1 {:font-size   (ms 2)
           :font-weight :bold
           :line-height 2
-          :padding     [[(ms 2) 0]]}]
+          :padding     [[(ms 5) 0 (ms 1)]]}]
     [:h2 {:font-size   (ms 1.25)
           :font-weight :bold
           :line-height 2
-          :padding     [[(ms 1) 0]]
+          :padding     [[(ms 2) 0 (ms 0.5) 0]]
           }]
+
+    [:h1+h2 {:padding-top 0}]
 
     [:h3 {:font-size   (ms 0.25)
           :line-height 3
@@ -391,6 +394,7 @@
     [:p {:font-size   (ms 0)
          :line-height 1.5
          }]
+    [:p+p {:margin-top (ms 1)}]
     [:p+ul
      :p+ol {:margin [[(ms 1) (rem 2)]
                      ]}]]
@@ -398,7 +402,8 @@
    [:.Docs-content [:ul [:> [:li {:list-style-type :disc}]]]]
    [:.Docs-content [:ol [:> [:li {:list-style-type :decimal}]]]]
    [:.Docs-content [:ul :ol {:line-height 1.5}]]
-   [:.Docs-content [:ul :ol [:li {:padding-left (ms 1)}]]]
+   [:.Docs-content [:ul :ol [:li {:padding-left (ms 1)
+                                  :line-height  (ms 1.25)}]]]
 
    [:.Docs-content [:a.button (++ ButtonProps
                                   {:background-color color-primary-500
@@ -406,6 +411,11 @@
                                    :padding          [[(rem 0.5) (rem 1)]]
                                    :margin           [[(rem 1) 0 (rem 1.5) 0]]})
                     ]]
+
+
+   ;; Give some huge space when image + i happened.
+   [:.Docs-content [:img+i {:min-height (rem 5)
+                            :display    :block}]]
 
 
    [:.Docs-content [:blockquote {:position :relative
@@ -431,10 +441,10 @@
                       :border           [[(px 1) :solid color-primary-200]]
                       :padding          [[0 (rem 0.5)]]
                       }]
-     [
-      [:.Docs-content [:p [:> [:code inline-code]]]]
-      [:.Docs-content [:li [:code inline-code]]]
-      ])
+        [
+         [:.Docs-content [:p [:> [:code inline-code]]]]
+         [:.Docs-content [:li [:code inline-code]]]
+         ])
    ])
 
 (defstyles
