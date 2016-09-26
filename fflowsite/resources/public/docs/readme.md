@@ -172,7 +172,7 @@ const IsFramerJsAwesome = true;
 IsFramerJsAwesome = false;
 ```
 
-### ES6 - Destructuring and Template Strings
+### ES6 - Destructuring
 `Destructuring` is a powerful concept. You can break thing into many small parts.
 This is time saver. `Template Strings` is a really handy tools for formatting
 strings.
@@ -194,69 +194,66 @@ Template string starts with backtick \` and is closed with backtick\`
 
 
 
-### Modules
+### Modules - Your First Module
 
-Module is a great concept for building a program. If you design well, your modules
-can be used to place altogether. You can easily create a new module and use it
+Module is a great concept for building a program. If you define modules
+well enough, you could build a great prototype easier and faster.
+You can easily create a new module and use it
 inside your program. Here is simple example.
 
 <img src="blank.png" class="lazy" width="605" height="456" data-src="http://resources.framerflow.com/assets/codingtools_module.gif">
-<i></i>
 
+You can create a module file anywhere you want. But usual location is under
+root folder or `modules` folder. If you use module creation ui, the file is
+ creaed under `modules` folder.
 
-### Modules - Node.js 
-FramerFlow basically supports node.js module system. `require` is used to import module file
-into your project. If you use `npm` module, you can simply include by calling `require(module_name)`
+ #### `require`
+ In order to use module you should use `require` function.
 
-```javascript
-require("lodash");
 ```
+// Bring your module into current file
+// For the local module, the path is relative from current project.
+//
+let m1 = require("./relative_file_name");
 
-
-If you have your own project's module, it should be included by using relative path
-against project root path.
-
-```javascript
-require("./YOUR_OWN_MODULES/MODULE_NAME.JS");
+// Node module
+// Directly use the module name itself.
+let _ = require("lodash");
 ```
+The variables or functions from modules are only exposed to outside
+when they are set in `module.exports`. The detail and complete guide is here:
 
-FramerStudio based project has modules under `modules` directory. In order to include
-those module, you should provide relative path to `require` function.
+* [node.js module documentation](https://nodejs.org/api/modules.html#modules_module_exports)
+* [FlowType module](https://flowtype.org/docs/modules.html) - FramerFlow *only* supports __commonjs__ module system.
 
-```javascript
-require("./modules/AwesomeFramerJsModule.js");
-```
+### Modules - Node.js
+FramerFlow basically supports node.js module system. Let's start to use `lodash`
+module which is a great utility library for handling array, object and etc.
+See the image.
 
-Module feature can be used to import asset definitions. Imported assets are saved under
-`imported` folder. When you import Photoshop PSD file, the generated images and layer
-definitions files are placed altogether. And also FramerFlow will generate simple module
-file which can be imported into your project so layer name can be tracked by intellisense
-feature.
+<img src="blank.png" class="lazy" width="720" height="512" data-src="http://resources.framerflow.com/assets/codingtools_modules_node.gif">
 
-```javascript
-require("./imported/ImportedAsset/layers.js");
-```
+It's simple, isn't it? You can freely use nodejs modules.
 
-When you export or share the project, those required modules are all transpiled into
-gigantic `app.js` file which is basically entry Javascript file. FramerFlow uses webpack
-builder to generate final javascript file.
+> Theses module files are merged into one single file, `app.js`.
+> The packaging process is done via [WebPack](https://webpack.github.io/).
 
 
-### Instant Watches
-When you want to see actual value in variables during runtime, you can set up instant
-watch just right beside of the variable code. During program execution when it hits your
-watch point, then FramerFlow will display the value.
+### Instant watch
+Instant watch is a handy tool to inspect value of variable. You can easily set up
+watch by using keyboard shortcut, `Alt + w`.
 
-To setup a watch, select variable name by dragging mouse then click `Menu` > `Code` > `Add Watch`
-or `ALT + W` key.
+If the value of watch is object, you can deep dive into object properties. The watch
+only report a value to you whenever it gots a hit from code execution.
 
-If it is object, you can click and check inside as deep as you want. This makes
-your prototype's behaviours more transparent. Yes. You can use `print` statement
-but this watch feature provides easiness and handful method without adding some debug
-comment.
+Here is the guide.
 
-When the watch is hit several times, it records its history. You can look an way back to
-some previous steps and check the value.
+<img src="blank.png" class="lazy" width="720" height="489" data-src="http://resources.framerflow.com/assets/codingtools_instant_watch.gif">
+
+#### Watch History
+If a watch got several hits such as using `setInterval`, it records its history.
+So until next refresh you can have better understand when you need to see what is going
+on inside.
 
 
 ### REPL and Console
