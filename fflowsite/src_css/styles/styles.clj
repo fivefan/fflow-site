@@ -1,16 +1,16 @@
 (ns styles.styles
-    (:refer-clojure :exclude [rem])
-    (:require [garden.def :refer [defstylesheet defstyles]]
-      [garden.units :refer [px rem em percent]]
-      [mesh.grid :as grid]
-      [mesh.typography :as typo]
+  (:refer-clojure :exclude [rem])
+  (:require [garden.def :refer [defstylesheet defstyles]]
+            [garden.units :refer [px rem em percent]]
+            [mesh.grid :as grid]
+            [mesh.typography :as typo]
 
-      [clojure.pprint :refer [pprint]]
+            [clojure.pprint :refer [pprint]]
 
-      )
+            )
 
-    (:use [styles.base])
-    )
+  (:use [styles.base])
+  )
 
 
 (def gutter (px 28))
@@ -28,9 +28,9 @@
 
 (def ms
   (let [f (typo/modular-scale-fn 16 (:golden typo/scales))]
-       (fn [n]
-           (px (f n)))
-       ))
+    (fn [n]
+      (px (f n)))
+    ))
 
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def serif ["\"David Libre\"" "serif"])
@@ -48,29 +48,29 @@
   (into
     [[:.u-sizeFull {:width (percent 100)}]]
     (mapcat (fn [ncols]
-                (mapcat (fn [idx]
-                            [[(keyword (format ".u-size%sof%s"
-                                               idx
-                                               ncols))
-                              {:width (percent (* idx (/ 100 ncols)))}]
-                             [(keyword (format ".u-before%sof%s"
-                                               idx ncols))
-                              {:padding-left (percent (* idx (/ 100 ncols)))}]
-                             [(keyword (format ".u-after%sof%s"
-                                               idx ncols))
-                              {:padding-right (percent (* idx (/ 100 ncols)))}]]
-                            )
-                        (range 1 (inc ncols))))
+              (mapcat (fn [idx]
+                        [[(keyword (format ".u-size%sof%s"
+                                           idx
+                                           ncols))
+                          {:width (percent (* idx (/ 100 ncols)))}]
+                         [(keyword (format ".u-before%sof%s"
+                                           idx ncols))
+                          {:padding-left (percent (* idx (/ 100 ncols)))}]
+                         [(keyword (format ".u-after%sof%s"
+                                           idx ncols))
+                          {:padding-right (percent (* idx (/ 100 ncols)))}]]
+                        )
+                      (range 1 (inc ncols))))
             [2 3 4 6 8 12 24]
             ))
   )
 (defn u-size
-      [k]
-      (->> sizes
-           (filter #(= (first %) k))
-           first
-           last)
-      )
+  [k]
+  (->> sizes
+       (filter #(= (first %) k))
+       first
+       last)
+  )
 
 (def utils
   [
@@ -84,10 +84,10 @@
 
    [:.u-flexEmbedRatio (FlexEmbed-ratio 1 1)]
    (mapv (fn [[width-ratio height-ratio]]
-             [(keyword (format ".u-flexEmbedRatio--%sby%s"
-                               width-ratio height-ratio)
-                       )
-              (FlexEmbed-ratio width-ratio height-ratio)])
+           [(keyword (format ".u-flexEmbedRatio--%sby%s"
+                             width-ratio height-ratio)
+                     )
+            (FlexEmbed-ratio width-ratio height-ratio)])
          [[3 1]
           [2 1]
           [16 9]
@@ -103,6 +103,14 @@
                       :font-weight :bold
 
                       }]
+   (->> (range 1 12)
+        (mapcat (fn [v]
+                  [[(keyword (format ".u-marginTop--%sms" v))
+                    {:margin-top (ms v)}
+                    ]
+                   [(keyword (format ".u-marginBottom--%sms" v))
+                    {:margin-bottom (ms v)}]
+                   ])))
    ]
   )
 
@@ -348,13 +356,13 @@
     [:a.level-2]
     [:a.level-3 {:padding-left (rem 1.5)}]
 
-    [:a.active {:color "#3F51B5"}]
+    #_[:a.active {:color "#3F51B5"}]
     [:a.active:after {:content       "\"\""
                       :position      :absolute
                       :left          0
                       :right         0
-                      :bottom        (px -4)
-                      :border-bottom [[(px 4) :solid color-primary-500]]}]
+                      :bottom        (px -2)
+                      :border-bottom [[(px 2) :solid color-primary-500]]}]
     [:a.level-3.active:after {:left (rem 1.5)}]
     ]
 
@@ -441,11 +449,27 @@
                       :border           [[(px 1) :solid color-primary-200]]
                       :padding          [[0 (rem 0.5)]]
                       }]
-        [
-         [:.Docs-content [:p [:> [:code inline-code]]]]
-         [:.Docs-content [:li [:code inline-code]]]
-         ])
+     [
+      [:.Docs-content [:p [:> [:code inline-code]]]]
+      [:.Docs-content [:li [:code inline-code]]]
+      ])
    ])
+
+
+(def About
+  [:.About
+   :.Contact
+   [
+    [:h4
+     :h5 {:padding-left  0
+          :padding-right 0}]
+    [:h5 {:margin-top    (ms 1)
+          :margin-bottom (ms 0)
+          }]
+    [:p {:line-height 1.5}]
+    [:section {:margin-top (ms 1.25)}]
+    ]])
+
 
 (defstyles
   screen
@@ -466,6 +490,7 @@
    Footer
 
    Docs
+   About
    ]
   )
 

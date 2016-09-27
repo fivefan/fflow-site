@@ -14,7 +14,7 @@
   (layout/render
     "home.html" {:docs     (-> "docs/docs.md" io/resource slurp)
                  :features [{:title "ES6 JavaScript"
-                             :desc  "Just use your shiny JavaScript skill\nwith learning powerful ES6 features"
+                             :desc  "Just use your shiny JavaScript skill\nwith learning powerful <a href='/docs#user-guide-coding-tools-es6-overview'>ES6 features</a>"
                              :img   "url(/img/feature_javascript.png)"
                              }
                             {:title "Coding Tools"
@@ -36,6 +36,9 @@
     "docs.html" {:no-footer true
                  :readmeuri (:readmeuri env)
                  }))
+(defn contact-page []
+  (layout/render
+    "contact.html" {}))
 
 (defn about-page []
   (layout/render "about.html"))
@@ -44,5 +47,6 @@
            (GET "/" [] (home-page))
            (GET "/test" [] (test-page))
            (GET "/docs" [] (docs-page))
+           (GET "/contact" [] (contact-page))
            (GET "/about" [] (about-page)))
 

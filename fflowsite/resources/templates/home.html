@@ -12,10 +12,11 @@
     </div>
     <div class="Hero-image u-sizeFull">
         <div class="Hero-imageLayoutRoot u-flexEmbed
-                    u-size6of12">
-            <div class="u-flexEmbedRatio--16by9"></div>
+                    u-size8of12">
+            <div class="u-flexEmbedRatio--4by3"></div>
             <div class="u-flexEmbedContent">
-
+                <img src="http://resources.framerflow.com/assets/main.jpg"
+                     width="100%"/>
             </div>
         </div>
     </div>
@@ -38,7 +39,7 @@
                          style="background-image: {{item.img}}"></div>
                 </div>
                 <div class="FeatureItem-title">{{item.title}}</div>
-                <div class="FeatureItem-desc">{{item.desc}}</div>
+                <div class="FeatureItem-desc">{{item.desc|safe}}</div>
             </div>
             {% endfor %}
         </div>

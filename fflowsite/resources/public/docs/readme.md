@@ -1,10 +1,14 @@
 # QUICK START
 
 ## Introduction
-FramerFlow is an new editor that allows you to create a beautiful prototype
-faster and easier than ever before. The prototype is powered by awesome
-[Framer.js](http://framerjs.com). It uses vanilla Javascript as main 
-language so you may start a new project right away if you already know Javascript.
+FramerFlow is an editor for creating a beautiful prototype
+faster and easier than ever before. The source of powerful prototyping is
+from the awesome [Framer.js](http://framerjs.com) library. Tons of wonderful prototyping are
+already created by designers, developers and hobbist using Framer.js.
+FramerFlow has fully integrated Framer.js as much as it can.
+So FramerFlow uses Javascript as a main language. One of the instant benefits from
+directly using Javascript is that you could start your project just in minutes
+if you have a little Javascript experience.
 
 FramerFlow is a desktop application for Windows platform. Current build only
 supports 64 bits OS. In this first preview release of FramerFlow, the application
@@ -320,24 +324,22 @@ layer hierarchy inside your editor. You can try very basic layer's properties.
  * Visibility on/off
  * Inspect in preview
  * States
- 
- 
 
-#### See hierarchy, id and their name
-
-#### Turn on/off visibility
-
-#### Highlight the layer on preview window
+<img src="blank.png" class="lazy" width="720" height="453" data-src="http://resources.framerflow.com/assets/designtools_layer_inspection.gif">
 
 
-### Layer Tracking
-FramerFlow always tries to find which layer on runtime maps onto layer variable name in code.
-By mapping runtime and static time, you can effortlessly check the layer creation and usage
-in both preview and coding time.
+### Jump to Layer Definition
+ FramerFlow always tries to find an way to map your source code's variable to
+ run time layer. The mapping opens huge opportunities where design asset can be
+ seamlessly integrated into code and vice versa. For example, FramerStudio's autocode
+ could be one of the great examples.
 
-If FramerFlow successfuly finds matched variable name, it would display in layer row.
+ Current beta release only provides jump to declaration feature. When FramerFlow found
+ mapping variable, the name is on the layer panel. If you click the variable, you can
+ see where the layer is actually used in your design.
 
-Click on the name hops on the variable occurrences in code editor.
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/designtools_layer_jump.gif">
+
 
 ### States
 Layer states are also displayed if it has. When you click each state, the corresponding layer
@@ -348,14 +350,19 @@ If you click right button, there is `Execute next() state` menu. Click the menu 
 moves onto next state by its order.
 
 
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/designtools_layer_states.gif">
+
 ### Change configurations
 There is command menus on preview window above. You can try some configurations:
 
-* Fullscreen mode
-* Change zoom level
-* Rotate left/right
-* Change background color - device background or preview background
-* Change device
+* <i class="material-icons">refresh</i> Refresh preview
+* <i class="material-icons">fullscreen</i> Fullscreen mode
+* <i class="material-icons">rotate_left</i> <i class="material-icons">rotate_right</i> Rotate left/right
+* <i class="material-icons">zoom_in</i> Change zoom level
+* <i class="material-icons">colorize</i> Change background color - device background or preview background
+* <i class="material-icons">devices_other</i> Change device
+
+> One of those setting changes let the application to generate revised `framer.cfg.js` file.
 
 ## Publishing tools
 FramerFlow helps you to easily publish a project to your clients.
@@ -365,57 +372,89 @@ FramerFlow helps you to easily publish a project to your clients.
 * Export for upload on whatever you want to
 
 ### Mirroring
+FramerFlow provides mirroring option. You can easily check the prototype in your mobile
+device's browser if the device uses same WiFi router.
+
+On the mirroring page mouse, touch and scroll actions are propagates into every connected
+ devices.
+
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/publishing_mirror.gif">
 
 ### Sharing
 In order to share your project, you should first sign in to FramerFlow service.
-Here FramerFlow only supports Facebook sign-in at the time of writing.
+FramerFlow only supports Facebook login. Just login with your Facebook credential.
+
+Once you sign in share is just one-tap away. Click `share` button on the left, bottom side menu.
+Then click `Publish`. That's it. You will get the link. You can share freely as you want.
+If you do not like share anymore, then just go back to share dialog. Then `Delete` button.
+
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/publishing_share.gif">
 
 ### Export
+When you need to host your prototype privately or back up your prototype, `export` could be
+helpful in the situation. Click `File` > `Export` then type in the zip file name. Pretty simple.
 
+<img src="blank.png" class="lazy" width="720" height="592" data-src="http://resources.framerflow.com/assets/publishing_export.gif">
 
 ## Editing tools
+FramerFlow provides some modern editing features as following:
+
+* Multi-cursor
+* Expand range
+* Quick finder
 
 ### Multi-cursor
-### Expand range
-### Quick finder
+First select some region and `Ctrl + d` will select next same occurrence. You can simultaneously
+change with multiple selections.
 
-## Import
-There are tons of awesome, beautiful prototypes which are created and crafted by FramerJs community.
-It is very nice to bring those artifacts into FramerFlow project. Therefore
-FramerFlow provides importing tools. You could imports from three different ways:
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/editing_multi_cursor.gif">
+
+### Expand range
+By pressing `Ctrl + w` you can grow the selection into next block level. Very helpful tool once
+you get used.
+
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/editing_expand_region.gif">
+
+### Quick finder
+`Alt + o` opens quick finder. By a few keystroke you can find your file easily.
+
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/editing_quick_finder.gif">
+
+### Auto format
+`Ctrl + '` automatically reformat you code. Do not spend you time to beautify your code. It is
+editor's job.
+
+<img src="blank.png" class="lazy" width="720" height="536" data-src="http://resources.framerflow.com/assets/editing_auto_format.gif">
+
+## Import Tools
+### FramerStudio
+FramerStudio is a pretty awesome tool for creating prototype. There are tons of projects which
+are beautifully created and carefully crafted by Framer.js community. All most of all of them was
+ created by FramerStudio. Bringing those beautiful artifacts into FramerFlow is really attractive.
+ Therefore FramerFlow provides some importing tools. There are three ways to import the project.
 
 * Directly import from FramerStudio project in local file
-* Import from zip link
-* Import from shared url
+* Import from FramerStuido's zip link
+* Import from FramerStudio's shared url
 
-> Those projects are mainly created with CoffeeScript language. Since FramerFlow uses
-> ES6 + FlowType flavored JavaScript, the transpile down to the language is critical step.
-> The conversion is not perfect at the time of writing and it still has many problems.
-> But hopefully most of them are easily fixed with little efforts.
+> Those projects are mainly created with CoffeeScript. Since FramerFlow uses
+> JavaScript, FramerFlow need to an way to convert from CoffeeScript into ES6 Javascript.
+> From CoffeeScript to ES6 Javascript is easy but to ES6 Javascript is a
+> different story. In the preview release there are many problems for automatic
+> transfer. We'll fix it in coming releases.
 
-Those three are all identical in terms of functionality. In this section let's
-import one of beautiful project via public url.
+### Import from FramerStuio URL
+You can import a project from shared URL into FramerFlow.
 
-1. First let's launch FramerFlow
-2. Click File menu > Import > Import from FramerStudio share link
-3. The import setting dialog is displayed. Enter the url and target folder.
-4. Click import button.
-5. Wait for a few minutes depending on project's size and network condition.
-
-## Code with Javascript & ES6
-Any users who are able to code with Javascript can start FrmaerJs project without learning another language. FramerFlow's main language is ES6 powered Javascript. It does fully support all of ES6 features except module feature.
-
-
-# TROUBLESHOOTINGS
-
-## Cannot find module?
-## Watch setup error
-
+<img src="blank.png" class="lazy" width="720" height="591" data-src="http://resources.framerflow.com/assets/import_url.gif">
 
 # REFERENCES
 Here are useful references:
 
-* <a href="https://framerjs.com/docs/" target="_blank">FramerJS documentation</a> - Most beautiful documentation site.
-* <a href="https://flowtype.org/">FlowType</a> - You can get find very useful language references
+* <a href="https://framerjs.com/docs/" target="_blank">Framer.js documentation</a> - Most beautiful documentation site.
+* <a href="https://flowtype.org/" target="_blank">FlowType</a> - You can get find very useful language references
+* <a href="https://https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla/" target="_blank">ES6 in Mozilla</a> - Great references for ES6
+
+<div style="min-height: 25vh"></div>
 
 
