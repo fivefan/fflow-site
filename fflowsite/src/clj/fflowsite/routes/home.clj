@@ -2,7 +2,13 @@
   (:require [fflowsite.layout :as layout]
             [compojure.core :refer [defroutes GET]]
             [ring.util.http-response :as response]
+            [fflowsite.config :refer [env]]
             [clojure.java.io :as io]))
+
+(defn test-page []
+  (layout/render
+    "test.html"
+    {}))
 
 (defn home-page []
   (layout/render
@@ -27,13 +33,16 @@
 
 (defn docs-page []
   (layout/render
-    "docs.html" {:no-footer true}))
+    "docs.html" {:no-footer true
+                 :readmeuri (:readmeuri env)
+                 }))
 
 (defn about-page []
   (layout/render "about.html"))
 
 (defroutes home-routes
            (GET "/" [] (home-page))
+           (GET "/test" [] (test-page))
            (GET "/docs" [] (docs-page))
            (GET "/about" [] (about-page)))
 

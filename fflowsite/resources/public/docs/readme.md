@@ -257,38 +257,56 @@ on inside.
 
 
 ### REPL and Console
-REPL(Read-Eval-Print-Loop) is a interactive environment to explore, test and check your
-code without refreshing or building project. In order to use REPL two ways are possible.
+REPL(Read-Eval-Print-Loop) is an interactive tool to explore your code easily. Basic steps
+for REPL is simple.
 
-* Select code block and then `CTRL+E` press.
-* Copy code block and then paste it in Console window. Then press `Enter`.
+1. Select code block
+2. Then `Ctrl + e`
+3. The code exeuction result is displayed in console window.
 
-You can directly see what the code block returns a value. You may change layer's state
-or layer's property if you have a valid layer variable.
+<img src="blank.png" class="lazy" width="720" height="535" data-src="http://resources.framerflow.com/assets/codingtools_repl.gif">
 
-FramerFlow also provides consoel window. All console messages are redirect to the console
-window. So you do not need to open up devtools for your project. If you want to check
-more detail thing, you can open up devtools.
 
-### FlowType's Static Analysis
-FlowType is JavaScript static analysis tool which is created and maintained by Facebook.
-Static analysis reports obvious/potential errors and invalid use cases of your variables,
-statements.
+FramerFlow also provides console window. All console log (i.e., `console.log("hello");`) are 
+redirect to the console window. So you do not need to open up devtools for your project. 
+If you want to inspect more deeply, you can open Chrome's devtool.
 
-Whenever you save or open one of your JavaScript files, the FlowType check automatically
-starts and gives you best guides.
+<img src="blank.png" class="lazy" width="720" height="535" data-src="http://resources.framerflow.com/assets/codingtools_console.gif">
+<i></i>
+ 
 
-If the error does not generate any runtime error, you may ignore their recommendation.
-But for the long term use, it may be better to adapt your code.
+### Code Analysis
+Code analysis is one of the wonderful tools where FramerFlow offers to you. 
+Generally we call the analysis as static analysis. Most benefits from the analysis
+ is that you get __a good coding private teacher__ by telling you what you should do and shouldn't.
+ You can run your prototype you have static analysis errors or not. It does not matter
+ to run your prototype since the analysis is statically from parsing your source code
+ not running it. This is perfectly ok for short term project. But when you consider more 
+ complicated and bigger project, it could be better to follow the guide and fix the errors
+ from static analysis.
+ 
+ > The analysis is from Facebook's [FlowType](https://flowtype.org/). You can check the
+ > version of `flow.exe` of which FramerFlow usees in about dialog.
 
-By adopting FlowType into FramerFlow, you can use type annotation feature. It is not
-mandatory for your daily work but if you do, you can get any potential errors in eraly
-stage and also get great support of intellisense feature.
+#### Example 1 - Type checking
+The function `square` accepts one number and returns its square value. The example shows
+when invalid input is given, the analysis suggests potential error point.
+
+<img src="blank.png" class="lazy" width="720" height="535" data-src="http://resources.framerflow.com/assets/codingtools_ana_type_tracking.gif">
+
+#### Example 2 - Null checking 
+FlowType is really good at finding possible null point. The sample is here.
+`maybeNo` could be null in certain situation. So FlowType detects the possibility in the code.
+
+<img src="blank.png" class="lazy" width="720" height="535" data-src="http://resources.framerflow.com/assets/codingtools_ana_fixing_errors.gif">
+
+
+
 
 
 ## Design tools
 
-FramerFlow provides some tools for exploration your design.
+FramerFlow provides interesting tools to test and inspect your design.
 
 * Layer inspection
 * Layer tracking
@@ -297,10 +315,13 @@ FramerFlow provides some tools for exploration your design.
 
 ### Layer inspection
 There is layer explorer button on the left-side menu. When you click, you can see the
-layer hierarchy inside your editor. Each row shows some information about each corresponding
-layer.
-
-You can try several things:
+layer hierarchy inside your editor. You can try very basic layer's properties.
+ 
+ * Visibility on/off
+ * Inspect in preview
+ * States
+ 
+ 
 
 #### See hierarchy, id and their name
 

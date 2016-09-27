@@ -35,10 +35,11 @@
 <script type="text/javascript" src="http://resources.framerflow.com/javascripts/lazyload.js"></script>
 
 <script type="text/javascript">
+    var __readme = "{{readmeuri}}";
     Flatdoc.run({
-        fetcher: Flatdoc.file('/docs/readme.md')
+        fetcher: Flatdoc.file(__readme)
     });
-    $(document).on('flatdoc:ready', function() {
+    $(document).on('flatdoc:ready', function () {
         $('.Docs-menu a').anchorjump();
         installLazyLoading();
     });

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link href="http://vjs.zencdn.net/5.11.6/video-js.css" rel="stylesheet">
+    <!-- For figwheel support -->
+    <script type="text/javascript" src="/js/compiled/sample.js"></script>
+</head>
+<body>
+
+<div style="min-height: 250px;">
+    test...test
+</div>
+<div style="min-height: 250px;">
+    HAHAHA
+</div>
+<div style="min-height: 250px;"> p1</div>
+<div style="min-height: 250px;"> p1</div>
+<div style="min-height: 250px;"> p1</div>
+<div style="min-height: 250px;"> p1</div>
+<video id="my-video"
+       class="video-js"
+       controls
+       preload="none"
+       width="640"
+       height="264"
+       poster="MY_VIDEO_POSTER.jpg"
+       data-setup='{}'>
+    <source src="http://resources.framerflow.com/assets/v00.mp4" type='video/mp4'>
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+</video>
+<div style="min-height: 250px;"> p1</div>
+<div style="min-height: 250px;"> p1</div>
+<script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+
+<script type="text/javascript">
+    (function () {
+        var $q = function (q, res) {
+            if (document.querySelectorAll) {
+                res = document.querySelectorAll(q);
+            } else {
+                var d = document
+                        , a = d.styleSheets[0] || d.createStyleSheet();
+                a.addRule(q, 'f:b');
+                for (var l = d.all, b = 0, c = [], f = l.length; b < f; b++)
+                    l[b].currentStyle.f && c.push(l[b]);
+
+                a.removeRule(0);
+                res = c;
+            }
+            return res;
+        }
+                , addEventListener = function (evt, fn) {
+            window.addEventListener
+                    ? this.addEventListener(evt, fn, false)
+                    : (window.attachEvent)
+                    ? this.attachEvent('on' + evt, fn)
+                    : this['on' + evt] = fn;
+        }
+                , _has = function (obj, key) {
+            return Object.prototype.hasOwnProperty.call(obj, key);
+        };
+
+
+        var player = videojs('my-video');
+        player.ready(function () {
+            console.log("PLAYER is READY");
+
+            $q(".vjs-big-play-button").addEventListener("click", function () {
+                console.log("PLAYER button is clicked...");
+            });
+        });
+
+
+    })();
+
+
+</script>
+</body>
+</html>
+
+
