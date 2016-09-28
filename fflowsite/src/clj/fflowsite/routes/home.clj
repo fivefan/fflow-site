@@ -12,7 +12,9 @@
 
 (defn home-page []
   (layout/render
-    "home.html" {:docs     (-> "docs/docs.md" io/resource slurp)
+    "home.html" {:title    "FramerFlow"
+                 :dev      (:dev env)
+                 :docs     (-> "docs/docs.md" io/resource slurp)
                  :features [{:title "ES6 JavaScript"
                              :desc  "Just use your shiny JavaScript skill\nwith learning powerful <a href='/docs#user-guide-coding-tools-es6-overview'>ES6 features</a>"
                              :img   "url(/img/feature_javascript.png)"
@@ -33,19 +35,24 @@
 
 (defn docs-page []
   (layout/render
-    "docs.html" {:no-footer true
+    "docs.html" {:title     "FramerFlow - Documentation"
+                 :no-footer true
+                 :dev       (:dev env)
                  :readmeuri (:readmeuri env)
                  }))
 (defn contact-page []
   (layout/render
-    "contact.html" {}))
+    "contact.html" {:title "FramerFlow - Contact"
+                    :dev   (:dev env)
+                    }))
 
 (defn about-page []
-  (layout/render "about.html"))
+  (layout/render "about.html" {:title "FramerFlow - About"
+                               :dev   (:dev env)
+                               }))
 
 (defroutes home-routes
            (GET "/" [] (home-page))
-           (GET "/test" [] (test-page))
            (GET "/docs" [] (docs-page))
            (GET "/contact" [] (contact-page))
            (GET "/about" [] (about-page)))
