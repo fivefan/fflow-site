@@ -2,6 +2,7 @@
   (:refer-clojure :exclude [rem])
   (:require [garden.def :refer [defstylesheet defstyles]]
             [garden.units :refer [px rem em percent]]
+            [garden.stylesheet :refer [at-media]]
             [mesh.grid :as grid]
             [mesh.typography :as typo]
 
@@ -22,6 +23,16 @@
         (grid/nuke-gutters-and-padding)
         ))
 
+(def mobile-size {:screen    true
+                  :min-width (px 1)
+                  :max-width (px 767)})
+(def mobile-size-only {:screen    true
+                       :max-width (px 767)})
+(def tablet-size {:screen    true
+                  :min-width (px 768)
+                  :max-width (px 1024)
+                  })
+(def desktop-size {:min-width (px 1025)})
 
 
 (def box-shadow-params [[0 (px 8) (px 30) (px 1) "rgba(20,20,20,0.25)"]])
@@ -44,25 +55,48 @@
 (def color-primary-200 "#90CAF9")
 (def color-primary-500 "#2962ff")
 
+
 (def sizes
-  (into
-    [[:.u-sizeFull {:width (percent 100)}]]
-    (mapcat (fn [ncols]
-              (mapcat (fn [idx]
-                        [[(keyword (format ".u-size%sof%s"
-                                           idx
-                                           ncols))
-                          {:width (percent (* idx (/ 100 ncols)))}]
-                         [(keyword (format ".u-before%sof%s"
-                                           idx ncols))
-                          {:padding-left (percent (* idx (/ 100 ncols)))}]
-                         [(keyword (format ".u-after%sof%s"
-                                           idx ncols))
-                          {:padding-right (percent (* idx (/ 100 ncols)))}]]
-                        )
-                      (range 1 (inc ncols))))
-            [2 3 4 6 8 12 24]
-            ))
+  (let [size-genf (fn [sz idx ncols important?]
+                    [[(keyword (format ".u-%ssize%sof%s"
+                                       sz
+                                       idx
+                                       ncols))
+                      {:width (str (* idx (float (/ 100 ncols)))
+                                   "%"
+                                   (when important?
+                                     " !important"))}]
+                     [(keyword (format ".u-%sbefore%sof%s"
+                                       sz
+                                       idx ncols))
+                      {:margin-left (str (* idx (float (/ 100 ncols)))
+                                         "%"
+                                         (when important?
+                                           " !important"))}]
+                     [(keyword (format ".u-%safter%sof%s"
+                                       sz
+                                       idx ncols))
+                      {:margin-right (str (* idx (float (/ 100 ncols)))
+                                          "%"
+                                          (when important?
+                                            " !important"))}]
+                     ]
+                    )]
+    (into
+      [[:.u-sizeFull {:width (percent 100)}]]
+      (mapcat (fn [ncols]
+                (mapcat (fn [idx]
+                          [
+                           (size-genf "" idx ncols false)
+                           (at-media tablet-size
+                                     (size-genf "md-" idx ncols true))
+                           (at-media mobile-size
+                                     (size-genf "sm-" idx ncols true))
+                           ]
+                          )
+                        (range 1 (inc ncols))))
+              [2 3 4 6 8 12 24]
+              )))
   )
 (defn u-size
   [k]
@@ -74,27 +108,47 @@
 
 (def utils
   [
-   [:.u-container {:max-width (px wrap-width)
-                   :margin    [[0 :auto]]
-                   }]
+   (at-media desktop-size
+             [:.u-container {:max-width (px wrap-width)
+                             :margin    [[0 :auto]]
+                             }]
+             )
+
+   (at-media desktop-size [:.u-lg-hidden {:display :none}])
+   (at-media tablet-size [:.u-md-hidden {:display :none}])
+   (at-media mobile-size [:.u-sm-hidden {:display :none}])
 
    [:.u-textAlignCenter {:text-align :center}]
-
+   [:.u-textDecorationNone {:text-decoration :none}]
    [:.u-flexEmbed FlexEmbed]
 
    [:.u-flexEmbedRatio (FlexEmbed-ratio 1 1)]
-   (mapv (fn [[width-ratio height-ratio]]
-           [(keyword (format ".u-flexEmbedRatio--%sby%s"
-                             width-ratio height-ratio)
-                     )
-            (FlexEmbed-ratio width-ratio height-ratio)])
-         [[3 1]
-          [2 1]
-          [16 9]
-          [4 3]
-          ])
+
+   (mapcat (fn [[width-ratio height-ratio]]
+             [[(keyword (format ".u-flexEmbedRatio--%sby%s"
+                                width-ratio height-ratio)
+                        )
+               (FlexEmbed-ratio width-ratio height-ratio)]
+              (at-media tablet-size
+                        [(keyword (format ".u-md-flexEmbedRatio--%sby%s"
+                                          width-ratio height-ratio)
+                                  )
+                         (FlexEmbed-ratio width-ratio height-ratio true)])
+              (at-media mobile-size
+                        [(keyword (format ".u-sm-flexEmbedRatio--%sby%s"
+                                          width-ratio height-ratio)
+                                  )
+                         (FlexEmbed-ratio width-ratio height-ratio true)])
+
+              ])
+           [[3 1]
+            [2 1]
+            [16 9]
+            [4 3]
+            ])
    [:.u-flexEmbedContent FlexEmbed-content]
    [:.u-flex1 (Flex 1)]
+   [:.u-linkColorsNone {:color :inherit}]
 
 
    [:.u-sectionTitle {:padding     [[(ms 1) 0]]
@@ -116,9 +170,13 @@
 
 (defstyles
   typography
-
   [
    [:body {:font-family sans}]
+
+   [:* {:box-sizing :border-box
+        :padding    0
+        :margin     0
+        }]
 
    [:h1 {:padding     [[0 (ms 2)]]
          :font-size   (ms 5)
@@ -132,7 +190,7 @@
 
    [:h4 {:padding     [[0 (ms 1)]]
          :font-size   (ms 2)
-         :line-height (ms 2)}]
+         :line-height 1.25}]
 
    [:h5 {:padding     [[0 (ms 1)]]
          :font-size   (ms 1)
@@ -188,8 +246,17 @@
    [:.Nav (++ (Flexbox)
               (AlignItems :center)
               (Fg color-fg-500)
-              {:height (rem 6.3)}
+              {
+               :height  (rem 6.3)
+               :padding [[0 (ms 1)]]}
               )]
+   (at-media tablet-size
+             [:.Nav {:padding [[0 (ms 2)]]}])
+   (at-media mobile-size
+             [:.Nav (++ (FlexboxDirection :column)
+                        {:padding [[0 (ms 2)]]
+                         })]
+             )
    [:.Nav-title {:text-transform :uppercase
                  :letter-spacing (px 3)
                  :font-size      (ms 0)}]
@@ -197,6 +264,12 @@
                    (Flex 1)
                    (AlignItems :center)
                    {:font-weight 800})]
+   (at-media mobile-size-only
+             [
+              [:.Nav {:height :auto}]
+              [:.Nav-logo {:margin-top (ms 1)}]
+              [:.Nav-links {:margin-top (ms 2)}]]
+             )
    [:.Nav-link {:padding-left (ms 1)}]
    ])
 
@@ -216,6 +289,11 @@
                  :color       color-fg-700
                  :padding-top (ms 1)
                  }]
+   (at-media mobile-size-only
+             [:.Hero-desc {:text-align  :center
+                           :padding     [[(ms 1) (ms 2)]]
+                           :line-height 1.5
+                           }])
    [:.Hero-descPoint {:color       color-primary-500
                       :font-weight :bold}]
 
@@ -224,6 +302,8 @@
                      (AlignItems :center)
                      {:padding [[(ms 4) 0]]
                       })]
+   (at-media mobile-size-only
+             [:.Hero-image {:padding [[(ms 1) 0]]}])
    [:.Hero-imageLayoutRoot {
                             :box-shadow box-shadow-params
                             }]
@@ -240,13 +320,20 @@
 
    [:.Features-layoutRoot (++ (Flexbox)
                               (FlexboxDirection :column)
-                              (AlignItems :center))]
+                              (AlignItems :center)
+                              )]
 
    [:.Features-desc {:padding     [[(ms 1) 0]]
                      :font-size   (ms 1)
                      :font-family serif
                      }]
+   (at-media mobile-size-only
+             [
+              [:.Features {:padding [[(ms 1) 0]]}]
+              [:.Features-desc {:text-align :center
+                                :padding    [[(ms 1) (ms 2)]]}]])
    [:.Features-items (++ (Flexbox)
+                         (FlexWrap :wrap)
                          )]
    [:.Features-learnMore {:padding        [[(ms 3) 0]]
                           :padding-bottom (ms 1)}]
@@ -262,6 +349,8 @@
                       )]
    [:.FeatureItem-title {:padding   [[(ms 1) 0]]
                          :font-size (ms 1)}]
+   (at-media mobile-size-only
+             [:.FeatureItem-title {:padding [[(ms 0) 0]]}])
    [:.FeatureItem-desc {
                         :padding     [[0 (ms 0.5) (ms 1) (ms 0.5)]]
                         :font-family serif
@@ -269,7 +358,11 @@
                         :line-height (ms 1)
                         :text-align  :center
                         }]
-   [:.FeatureItem-photoImageContent {:background-size :contain
+   [:.FeatureItem-photoImageContent {:background-size     :contain
+                                     :background-repeat-x :no-repeat
+                                     :background-repeat-y :no-repeat
+                                     :background-position [[(percent 50)
+                                                            (percent 50)]]
                                      }]
 
    ])
@@ -278,10 +371,12 @@
   [
    [:.Promotion {}]
    [:.Promotion-layoutRoot (++ (Flexbox)
+                               (FlexWrap :wrap)
                                )]
    [:.Promotion-verbiage (++ (Flexbox)
                              (FlexboxDirection :column)
                              (JustifyContent :center))]
+   (at-media tablet-size [:.Promotion-verbiage {:padding [[(ms 2) 0]]}])
    [:.Promotion-photo {:background-image    "url(../img/promotion_bg.jpg)"
                        :background-size     :cover
                        :background-repeat-x :no-repeat
@@ -289,12 +384,20 @@
                        :min-height          (px 520)
                        :box-shadow          box-shadow-params
                        }]
+   (at-media mobile-size-only
+             [:.Promotion-photo {:background-size :contain
+                                 :box-shadow      :none}])
    [:.Promotion-verbiage [:p {:padding     [[(rem 0.75) 0]]
                               :line-height 1.5
                               :font-family serif
                               :font-size   (ms 0)}
                           ]]
+   (at-media mobile-size
+             [:.Promotion-verbiage {:text-align :center}])
    [:.Promotion-download {:padding [[(ms 1) 0]]}]
+   (at-media mobile-size
+             [:.Promotion-download {
+                                    }])
 
    ])
 
@@ -309,15 +412,26 @@
                             (AlignItems :center)
                             )]
    [:.Footer-link {:padding-left (ms 1)}]
+   (at-media tablet-size
+             [:.Footer-layoutRoot {:margin [[0 (ms 2)]]}])
+   (at-media mobile-size
+             [
+              [:.Footer-layoutRoot (FlexboxDirection :column)]
+              [:.Footer-links {:margin-top (ms 1)}]
+              ])
    ])
 
 (def Docs
   [
    [:.Docs (++ (Flexbox))]
    [:.Docs-layoutRoot (++ (Flexbox)
-                          {:position :relative})]
+                          {:position   :relative
+                           :overflow-x :hidden})]
+
    [:.Docs-menuBar (++ {:position :relative
                         :width    "25% !important"})]
+   (at-media tablet-size [:.Docs-menuBar {:display :none}])
+   (at-media mobile-size [:.Docs-menuBar {:display :none}])
    [:.Docs-menuBar.menubar.fixed {:position   :fixed
                                   :width      "100% !important"
                                   :overflow-y :hidden
@@ -326,8 +440,10 @@
                                   :top        0
                                   :bottom     0
                                   }
-    [:.u-container {:height   :100vh
-                    :position :relative}]
+    (at-media desktop-size
+              [:.u-container {:height   :100vh
+                              :position :relative}]
+              )
     [:.Docs-menu (++ (u-size :.u-size1of4)
                      {:height       :100vh
                       :margin-right (percent 75)
@@ -335,6 +451,8 @@
                      )
      ["&::-webkit-scrollbar" {:width  (rem 0.5)
                               :height (rem 0.5)}]]
+    (at-media tablet-size
+              [:.Docs-menu {:padding [[0 (rem 1)]]}])
     ]
 
    [:.Docs-menu [:li {:font-size   (rem 0.9)
@@ -368,7 +486,8 @@
 
 
    [:.Docs-content {:position :relative}]
-   [".Docs-menuBar.menubar.fixed + .Docs-content" {:margin-left (percent 25)}]
+   (at-media desktop-size
+             [".Docs-menuBar.menubar.fixed + .Docs-content" {:margin-left (percent 25)}])
 
    [:.Docs-content [:h1:first-child {:padding-top (ms 0)}]]
    [:.Docs-content

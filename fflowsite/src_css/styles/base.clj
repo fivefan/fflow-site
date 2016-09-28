@@ -470,12 +470,19 @@
   )
 
 (defn FlexEmbed-ratio
-  [width-ratio height-ratio]
-  {:display        :block
-   :padding-bottom (percent (/ (* 100 height-ratio)
-                               width-ratio))
-   :width          (percent 100)
-   })
+  ([width-ratio height-ratio]
+    (FlexEmbed-ratio width-ratio height-ratio false))
+  ([width-ratio height-ratio important?]
+   {:display        :block
+    :padding-bottom (str (float (/ (* 100 height-ratio)
+                                   width-ratio))
+                         "%"
+                         (when important?
+                           " !important"))
+    :width          (str "100%"
+                         (when important?
+                           " !important"))
+    }))
 
 (def FlexEmbed-content
   {:position :absolute

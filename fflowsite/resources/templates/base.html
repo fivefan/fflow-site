@@ -31,10 +31,17 @@
     {% endblock %}
 
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-77944344-2', 'auto');
         ga('send', 'pageview');
@@ -42,10 +49,12 @@
 </head>
 <body>
 <!-- navbar -->
-<nav class="Nav u-container" role="navigation">
+<nav class="Nav u-container u-sizeFull" role="navigation">
     <div class="Nav-logo">
         <img src="img/fflow_logo.png">
-        <h5 class="Nav-title">FramerFlow</h5>
+        <a href="/" class="u-textDecorationNone u-linkColorsNone">
+            <h5 class="Nav-title">FramerFlow</h5>
+        </a>
     </div>
     <div class="Nav-links">
         <a class="Nav-link LinkButton" href="/">HOME</a>
