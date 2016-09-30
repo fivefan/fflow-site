@@ -20,15 +20,15 @@
                              :img   "url(/img/feature_javascript.png)"
                              }
                             {:title "Coding Tools"
-                             :desc  "Instant watch, built-in REPL\nsupport and many, many \nmodern editing features are\nwaiting for you"
+                             :desc  "<a href='/docs#user-guide-coding-tools-instant-watch'>Instant watch</a>, built-in <a href='/docs#user-guide-coding-tools-repl-and-console'>REPL</a>\nsupport and \n<a href='/docs#user-guide-editing-tools'>some modern editing features</a> are\nwaiting for you"
                              :img   "url(/img/feature_code.png)"
                              }
                             {:title "Design Tools"
-                             :desc  "Layer hierarchy, state simulation\nand inspection tools are give you\nbetter idea how things work"
+                             :desc  "<a href='/docs#user-guide-design-tools-layer-inspection'>Layer hierarchy</a>, <a href='/docs#user-guide-design-tools-states'>state simulation</a>\nand inspection tools are give you\nbetter idea how the design stuffs work under the hood."
                              :img   "url(/img/feature_design.png)"
                              }
                             {:title "Share"
-                             :desc  "Mirroring, sharing and import/\nexport for better communication"
+                             :desc  "<a href='/docs#user-guide-publishing-tools-mirroring'>Mirroring</a>, <a href='/docs#user-guide-publishing-tools-sharing'>sharing</a> and import/\nexport for better communication"
                              :img   "url(/img/feature_share.png)"
                              }
                             ]}))

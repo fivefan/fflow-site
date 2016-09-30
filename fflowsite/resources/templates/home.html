@@ -4,15 +4,17 @@
 <div class="Hero u-container">
     <div class="Hero-title u-textAlignCenter">
         <h4>
-            Framer.js<i class="fa fa-heart Hero-loveIcon" aria-hidden="true"></i> Javascript on Windows
+            Framer.js<br class="u-md-hidden u-lg-hidden" /><i class="fa fa-heart Hero-loveIcon" aria-hidden="true"></i><br class="u-md-hidden u-lg-hidden"/> Javascript<br class="u-md-hidden u-lg-hidden" /> on Windows
         </h4>
     </div>
     <div class="Hero-desc">
-        An editor, <span class="Hero-descPoint">FramerFlow</span>, for prototyping with Framer.js with ES6 JavaScript
+        A simple editor for happy prototyping with Framer.js on Windows
     </div>
     <div class="Hero-image u-sizeFull">
         <div class="Hero-imageLayoutRoot u-flexEmbed
-                    u-size8of12">
+                    u-size8of12
+                    u-sm-size2of2
+                    u-md-size2of2">
             <div class="u-flexEmbedRatio--4by3"></div>
             <div class="u-flexEmbedContent">
                 <img src="http://resources.framerflow.com/assets/main.jpg"
@@ -32,9 +34,16 @@
         <div class="Features-desc">We have some exciting features for your prototyping.</div>
         <div class="Features-items">
             {% for item in features %}
-            <div class="FeatureItem u-size1of4">
+            <div class="FeatureItem
+                        u-size1of4
+                        u-md-size1of2
+                        u-sm-size2of2
+                        ">
                 <div class="FeatureItem-photo u-sizeFull u-flexEmbed">
-                    <div class="u-flexEmbedRatio"></div>
+                    <div class="u-flexEmbedRatio
+                                u-md-flexEmbedRatio--16by9
+                                u-sm-flexEmbedRatio--3by1
+                                "></div>
                     <div class="u-flexEmbedContent FeatureItem-photoImageContent"
                          style="background-image: {{item.img}}"></div>
                 </div>
@@ -52,25 +61,28 @@
 <div class="Promotion">
     <div class="Promotion-layoutRoot u-container">
         <div class="Promotion-verbiage
-                    u-size5of12 u-after1of12">
+                    u-size5of12 u-after1of12
+                    u-sm-before1of8 u-sm-size6of8 u-sm-after1of8
+                    u-md-before1of6 u-md-size4of6 u-md-after1of6
+                    ">
             <div class="Promotion-title u-sectionTitle">FramerFlow for Windows</div>
             <p>
-                Awesome FramerFlow for Windows let you give a power to
-                create beautiful prototype on Windows platform.
+                FramerFlow provides perfect environment to do prototyping on
+                windows platform with Framer.js.
+                Using coding and design inspection tool has a tremendous fun.
             </p>
             <p>
-                JavaScript ES6 is a thing to give you more comfortable and
-                powerful than ever before it was.
-            </p>
-            <p>
-                Download today and start your shiny prototyping with FramerFlow.
+                Download today and start happy prototyping with FramerFlow.
             </p>
             <div class="Promotion-download">
-                <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA WINDOWS ONLY (64
+                <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA <br class="u-md-hidden u-lg-hidden"/>WINDOWS ONLY(64
                     BITS)</a>
             </div>
         </div>
-        <div class="u-size6of12 Promotion-photo">
+        <div class="u-size6of12 Promotion-photo
+                    u-sm-size2of2
+                    u-md-size2of2
+                    ">
         </div>
     </div>
 </div>
