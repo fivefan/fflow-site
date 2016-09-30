@@ -6,6 +6,9 @@
     <link href="http://vjs.zencdn.net/5.11.6/video-js.css" rel="stylesheet">
     <!-- For figwheel support -->
     <script type="text/javascript" src="/js/compiled/sample.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 </head>
 <body>
 
@@ -19,62 +22,97 @@
 <div style="min-height: 250px;"> p1</div>
 <div style="min-height: 250px;"> p1</div>
 <div style="min-height: 250px;"> p1</div>
-<video id="my-video"
-       class="video-js"
-       controls
-       preload="none"
+
+<video id="my-video" class="AutoVideo video-js"
+       loop controls preload="none"
        width="640"
        height="264"
-       poster="MY_VIDEO_POSTER.jpg"
-       data-setup='{}'>
-    <source src="http://resources.framerflow.com/assets/v00.mp4" type='video/mp4'>
+       data-setup='{
+        "bigPlayButton": false
+       }'>
+    <source src="https://stg.framerflow.com/media/eunsol00.mp4" type='video/mp4'>
     <p class="vjs-no-js">
         To view this video please enable JavaScript, and consider upgrading to a web browser that
         <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
     </p>
 </video>
+
 <div style="min-height: 250px;"> p1</div>
 <div style="min-height: 250px;"> p1</div>
 <script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
 
 <script type="text/javascript">
     (function () {
-        var $q = function (q, res) {
-            if (document.querySelectorAll) {
-                res = document.querySelectorAll(q);
-            } else {
-                var d = document
-                        , a = d.styleSheets[0] || d.createStyleSheet();
-                a.addRule(q, 'f:b');
-                for (var l = d.all, b = 0, c = [], f = l.length; b < f; b++)
-                    l[b].currentStyle.f && c.push(l[b]);
+        var players = {};
+        var numWaitingPlayers = 0;
 
-                a.removeRule(0);
-                res = c;
+        function playIfPossible(p) {
+           p.play();
+        }
+        function pauseIfPossible(p) {
+            p.pause();
+        }
+        function autoPlayOrStopVideos(curTop) {
+            console.log("autoPlayOrStopVideos -- " + curTop);
+            console.log("Num. players -- " + _.size(players));
+
+            // Find maximum visible video players
+            var p = _.chain(players)
+                    .filter(function (p) {
+                        var bbox = p.el().getBoundingClientRect();
+                        return (bbox.top >= 0 && bbox.top < window.innerHeight)
+                                || (bbox.bottom > 0 && bbox.bottom < window.innerHeight);
+                    })
+                    .maxBy(function (p) {
+                        var bbox = p.el().getBoundingClientRect();
+                        return Math.min(window.innerHeight, bbox.bottom) - Math.max(0, bbox.top);
+                    })
+                    .value();
+            _.each(players,
+                    function (pp) {
+                        if (pp != p) {
+                            pauseIfPossible(pp);
+                        }
+                    });
+
+            if (!!p) {
+                console.log("FOUND PLAYER");
+                playIfPossible(p);
             }
-            return res;
         }
-                , addEventListener = function (evt, fn) {
-            window.addEventListener
-                    ? this.addEventListener(evt, fn, false)
-                    : (window.attachEvent)
-                    ? this.attachEvent('on' + evt, fn)
-                    : this['on' + evt] = fn;
+        autoPlayOrStopVideos = _.debounce(autoPlayOrStopVideos, 512);
+
+        function onVideosReady() {
+            console.log("All videos are ready");
+            autoPlayOrStopVideos(document.body.scrollTop);
         }
-                , _has = function (obj, key) {
-            return Object.prototype.hasOwnProperty.call(obj, key);
-        };
 
+        function initPlayers() {
+            $(".AutoVideo").each(
+                    function (_, v) {
+                        var player = videojs(v.id);
+                        numWaitingPlayers++;
+                        player.ready(function () {
+                            players[v.id] = player;
+                            --numWaitingPlayers;
+                            console.log("Player(" + v.id + ") ready...");
 
-        var player = videojs('my-video');
-        player.ready(function () {
-            console.log("PLAYER is READY");
+                            if (0 == numWaitingPlayers) {
+                                onVideosReady();
+                            }
+                        });
+                    }
+            );
+        }
 
-            $q(".vjs-big-play-button").addEventListener("click", function () {
-                console.log("PLAYER button is clicked...");
-            });
+        $(function () {
+            initPlayers();
         });
 
+
+        $(window).on("scroll", function () {
+            autoPlayOrStopVideos(document.body.scrollTop);
+        });
 
     })();
 

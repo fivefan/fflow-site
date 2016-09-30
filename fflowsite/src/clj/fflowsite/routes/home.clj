@@ -53,6 +53,7 @@
 
 (defroutes home-routes
            (GET "/" [] (home-page))
+           (GET "/test" [] (test-page))
            (GET "/docs" [] (docs-page))
            (GET "/contact" [] (contact-page))
            (GET "/about" [] (about-page)))
