@@ -37,7 +37,6 @@ Download the preview release with the link. After downloads execute it.
 > **Windows platform (64bits)** is required to start use the application. 
 >
 
-[DOWNLOAD SETUP >](https://release.framerflow.com/download)
 
 You will see the install processing window. It usually takes around 5~10 minutes
 to finish it. You will be ready to get started soon.
