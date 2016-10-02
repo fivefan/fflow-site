@@ -1,17 +1,17 @@
 (ns styles.styles
-  (:refer-clojure :exclude [rem])
-  (:require [garden.def :refer [defstylesheet defstyles]]
-            [garden.units :refer [px rem em percent]]
-            [garden.stylesheet :refer [at-media]]
-            [mesh.grid :as grid]
-            [mesh.typography :as typo]
+    (:refer-clojure :exclude [rem])
+    (:require [garden.def :refer [defstylesheet defstyles]]
+      [garden.units :refer [px rem em percent]]
+      [garden.stylesheet :refer [at-media]]
+      [mesh.grid :as grid]
+      [mesh.typography :as typo]
 
-            [clojure.pprint :refer [pprint]]
+      [clojure.pprint :refer [pprint]]
 
-            )
+      )
 
-  (:use [styles.base])
-  )
+    (:use [styles.base])
+    )
 
 
 (def gutter (px 28))
@@ -39,9 +39,9 @@
 
 (def ms
   (let [f (typo/modular-scale-fn 16 (:golden typo/scales))]
-    (fn [n]
-      (px (f n)))
-    ))
+       (fn [n]
+           (px (f n)))
+       ))
 
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def serif ["\"David Libre\"" "serif"])
@@ -58,53 +58,53 @@
 
 (def sizes
   (let [size-genf (fn [sz idx ncols important?]
-                    [[(keyword (format ".u-%ssize%sof%s"
-                                       sz
-                                       idx
-                                       ncols))
-                      {:width (str (* idx (float (/ 100 ncols)))
-                                   "%"
-                                   (when important?
-                                     " !important"))}]
-                     [(keyword (format ".u-%sbefore%sof%s"
-                                       sz
-                                       idx ncols))
-                      {:margin-left (str (* idx (float (/ 100 ncols)))
-                                         "%"
-                                         (when important?
+                      [[(keyword (format ".u-%ssize%sof%s"
+                                         sz
+                                         idx
+                                         ncols))
+                        {:width (str (* idx (float (/ 100 ncols)))
+                                     "%"
+                                     (when important?
                                            " !important"))}]
-                     [(keyword (format ".u-%safter%sof%s"
-                                       sz
-                                       idx ncols))
-                      {:margin-right (str (* idx (float (/ 100 ncols)))
-                                          "%"
-                                          (when important?
-                                            " !important"))}]
-                     ]
-                    )]
-    (into
-      [[:.u-sizeFull {:width (percent 100)}]]
-      (mapcat (fn [ncols]
-                (mapcat (fn [idx]
-                          [
-                           (size-genf "" idx ncols false)
-                           (at-media tablet-size
-                                     (size-genf "md-" idx ncols true))
-                           (at-media mobile-size
-                                     (size-genf "sm-" idx ncols true))
-                           ]
-                          )
-                        (range 1 (inc ncols))))
-              [2 3 4 6 8 12 24]
-              )))
+                       [(keyword (format ".u-%sbefore%sof%s"
+                                         sz
+                                         idx ncols))
+                        {:margin-left (str (* idx (float (/ 100 ncols)))
+                                           "%"
+                                           (when important?
+                                                 " !important"))}]
+                       [(keyword (format ".u-%safter%sof%s"
+                                         sz
+                                         idx ncols))
+                        {:margin-right (str (* idx (float (/ 100 ncols)))
+                                            "%"
+                                            (when important?
+                                                  " !important"))}]
+                       ]
+                      )]
+       (into
+         [[:.u-sizeFull {:width (percent 100)}]]
+         (mapcat (fn [ncols]
+                     (mapcat (fn [idx]
+                                 [
+                                  (size-genf "" idx ncols false)
+                                  (at-media tablet-size
+                                            (size-genf "md-" idx ncols true))
+                                  (at-media mobile-size
+                                            (size-genf "sm-" idx ncols true))
+                                  ]
+                                 )
+                             (range 1 (inc ncols))))
+                 [2 3 4 6 8 12 24]
+                 )))
   )
 (defn u-size
-  [k]
-  (->> sizes
-       (filter #(= (first %) k))
-       first
-       last)
-  )
+      [k]
+      (->> sizes
+           (filter #(= (first %) k))
+           first
+           last)
+      )
 
 (def utils
   [
@@ -125,22 +125,22 @@
    [:.u-flexEmbedRatio (FlexEmbed-ratio 1 1)]
 
    (mapcat (fn [[width-ratio height-ratio]]
-             [[(keyword (format ".u-flexEmbedRatio--%sby%s"
-                                width-ratio height-ratio)
-                        )
-               (FlexEmbed-ratio width-ratio height-ratio)]
-              (at-media tablet-size
-                        [(keyword (format ".u-md-flexEmbedRatio--%sby%s"
-                                          width-ratio height-ratio)
-                                  )
-                         (FlexEmbed-ratio width-ratio height-ratio true)])
-              (at-media mobile-size
-                        [(keyword (format ".u-sm-flexEmbedRatio--%sby%s"
-                                          width-ratio height-ratio)
-                                  )
-                         (FlexEmbed-ratio width-ratio height-ratio true)])
+               [[(keyword (format ".u-flexEmbedRatio--%sby%s"
+                                  width-ratio height-ratio)
+                          )
+                 (FlexEmbed-ratio width-ratio height-ratio)]
+                (at-media tablet-size
+                          [(keyword (format ".u-md-flexEmbedRatio--%sby%s"
+                                            width-ratio height-ratio)
+                                    )
+                           (FlexEmbed-ratio width-ratio height-ratio true)])
+                (at-media mobile-size
+                          [(keyword (format ".u-sm-flexEmbedRatio--%sby%s"
+                                            width-ratio height-ratio)
+                                    )
+                           (FlexEmbed-ratio width-ratio height-ratio true)])
 
-              ])
+                ])
            [[3 1]
             [2 1]
             [16 9]
@@ -159,12 +159,12 @@
                       }]
    (->> (range 1 12)
         (mapcat (fn [v]
-                  [[(keyword (format ".u-marginTop--%sms" v))
-                    {:margin-top (ms v)}
-                    ]
-                   [(keyword (format ".u-marginBottom--%sms" v))
-                    {:margin-bottom (ms v)}]
-                   ])))
+                    [[(keyword (format ".u-marginTop--%sms" v))
+                      {:margin-top (ms v)}
+                      ]
+                     [(keyword (format ".u-marginBottom--%sms" v))
+                      {:margin-bottom (ms v)}]
+                     ])))
    ]
   )
 
@@ -282,6 +282,11 @@
    [:.Hero-title {:font-weight   :bold
                   :margin-top    (ms 3)
                   :margin-bottom (ms 1)}]
+   [:.Hero-video {:position :absolute
+                  :left     0
+                  :top      (percent -20)
+                  :width    (percent 133)
+                  :height   (percent 140)}]
    [:.Hero-loveIcon {:color   :blue
                      :padding [[0 (ms 0.25)]]}]
    [:.Hero-desc {:font-family serif
@@ -568,10 +573,10 @@
                       :border           [[(px 1) :solid color-primary-200]]
                       :padding          [[0 (rem 0.5)]]
                       }]
-     [
-      [:.Docs-content [:p [:> [:code inline-code]]]]
-      [:.Docs-content [:li [:code inline-code]]]
-      ])
+        [
+         [:.Docs-content [:p [:> [:code inline-code]]]]
+         [:.Docs-content [:li [:code inline-code]]]
+         ])
    ])
 
 

@@ -1,10 +1,17 @@
 {% extends "base.html" %}
+
+{% block page-head %}
+<link href="http://vjs.zencdn.net/5.11.6/video-js.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 
 <div class="Hero u-container">
     <div class="Hero-title u-textAlignCenter">
         <h4>
-            Framer.js<br class="u-md-hidden u-lg-hidden" /><i class="fa fa-heart Hero-loveIcon" aria-hidden="true"></i><br class="u-md-hidden u-lg-hidden"/> Javascript<br class="u-md-hidden u-lg-hidden" /> on Windows
+            Framer.js<br class="u-md-hidden u-lg-hidden"/><i class="fa fa-heart Hero-loveIcon"
+                                                             aria-hidden="true"></i><br
+                class="u-md-hidden u-lg-hidden"/> Javascript<br class="u-md-hidden u-lg-hidden"/> on Windows
         </h4>
     </div>
     <div class="Hero-desc">
@@ -12,13 +19,26 @@
     </div>
     <div class="Hero-image u-sizeFull">
         <div class="Hero-imageLayoutRoot u-flexEmbed
-                    u-size8of12
+                    u-size10of12
                     u-sm-size2of2
                     u-md-size2of2">
             <div class="u-flexEmbedRatio--4by3"></div>
             <div class="u-flexEmbedContent">
-                <img src="http://resources.framerflow.com/assets/main.jpg"
-                     width="100%"/>
+                <!--<img src="http://resources.framerflow.com/assets/main.jpg"-->
+                <!--width="100%"/>-->
+                <video id="my-video" class="Hero-video video-js"
+                       loop
+                       preload="auto"
+                       autoplay
+                       width="100%"
+                       height="100%"
+                       data-setup='{ "bigPlayButton": false }'>
+                    <source src="https://stg.framerflow.com/media/sequence_04.mp4" type='video/mp4'>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
             </div>
         </div>
     </div>
@@ -75,7 +95,8 @@
                 Download today and start happy prototyping with FramerFlow.
             </p>
             <div class="Promotion-download">
-                <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA <br class="u-md-hidden u-lg-hidden"/>WINDOWS ONLY(64
+                <a class="Button Button--blue" href="http://release.framerflow.com/download">DOWNLOAD BETA <br
+                        class="u-md-hidden u-lg-hidden"/>WINDOWS ONLY(64
                     BITS)</a>
             </div>
         </div>
@@ -87,4 +108,5 @@
     </div>
 </div>
 
+<script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
 {% endblock %}
