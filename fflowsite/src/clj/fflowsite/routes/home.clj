@@ -24,7 +24,7 @@
                              :img   "url(/img/feature_code.png)"
                              }
                             {:title "Design Tools"
-                             :desc  "<a href='/docs#user-guide-design-tools-layer-inspection'>Layer hierarchy</a>, <a href='/docs#user-guide-design-tools-states'>state simulation</a>\nand inspection tools are give you\nbetter idea how the design stuffs work under the hood."
+                             :desc  "<a href='/docs#user-guide-design-tools-layer-inspection'>Layer hierarchy</a>, <a href='/docs#user-guide-design-tools-states'>state simulation, </a>\nand inspection tools give you\na better idea how the design stuff work under the hood."
                              :img   "url(/img/feature_design.png)"
                              }
                             {:title "Share"

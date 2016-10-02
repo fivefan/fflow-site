@@ -1,30 +1,32 @@
 # QUICK START
 
 ## Introduction
-FramerFlow is an editor for creating a beautiful prototype
-faster and easier than ever before. The source of powerful prototyping is
-from the awesome [Framer.js](http://framerjs.com) library. Tons of wonderful prototyping are
-already created by designers, developers and hobbist using Framer.js.
-FramerFlow has fully integrated Framer.js as much as it can.
-So FramerFlow uses Javascript as a main language. One of the instant benefits from
-directly using Javascript is that you could start your project just in minutes
-if you have a little Javascript experience.
+FramerFlow is an editor for creating a beautiful prototype on Windows 
+platform. The prototyping power is totally from the [Framer.js](http://framerjs.com)
+ library.
+Tons of wonderful prototyping are already created by designers, developers 
+and hobbyist using Framer.js. We simply want to bring those artifacts into 
+Windows platform too.
 
-FramerFlow is a desktop application for Windows platform. Current build only
-supports 64 bits OS. In this first preview release of FramerFlow, the application
-provides:
+FramerFlow has fully integrated with Framer.js as much as it can. What it 
+means is starting a new Framer.js project on Windows is just one click away. 
+One of the good things of FramerFlow is that it uses Javascript as the main 
+language. So you simply set out Framer.js project just like regular Javascript 
+project. Also, the community of Javascript is huge. It is almost impossible not 
+to find a feasible solution of your any technical problems.
 
-* Framer.js fully integrated editor
-* Built-in supports regular ES6 Javascript including modules.
-* Layer inspection / state manipulation
+
+FramerFlow is a desktop application for Windows platform. Current build only supports 64 bits OS. In this first beta release of FramerFlow, the application provides following features.
+
+* Framer.js editor
+* Built-in supports ES6 Javascript
+* Layer inspection and its state manipulation
 * Intellisense which is powered by [FlowType](https://flowtype.org)
-* Built-in console log/ REPL editor 
+* Built-in console log and REPL editor 
 * Inline watch
 * Share
-* Etc.
 
-As you get started with the preview release, be sure to check the documentation.
-
+As you get started with the beta release, be sure to check the documentation.
 
 ## Getting started
 Here's how to get started with FramerFlow
@@ -32,19 +34,18 @@ Here's how to get started with FramerFlow
 ### Install
 Download the preview release with the link. After downloads execute it.
 
-
 > *CAUTION*
 > **Windows platform (64bits)** is required to start use the application. 
 >
 
 
-You will see the install processing window. It usually takes around 5~10 minutes
-to finish it. You will be ready to get started soon.
+You will see the install processing window. It usually takes around 5~10 minutes.
+You will be ready to get started soon.
 
 <img src="blank.png" class="lazy" width="472" height="312" data-src="http://resources.framerflow.com/assets/install-spinner.gif">
 
-After install successfully done FramerFlow is automatically being launched.
-You are able to see the screen.
+After the install has been successfully completed, 
+FramerFlow is automatically being launched. You are able to see the screen.
 
 <img src="blank.png" class="lazy" width="676" height="527" data-src="http://resources.framerflow.com/assets/framerflow00.png">
 <i></i>
