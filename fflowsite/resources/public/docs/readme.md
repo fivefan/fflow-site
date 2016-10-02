@@ -56,13 +56,13 @@ is just as following.
 
 <img src="blank.png" class="lazy" width="1015" height="606" data-src="http://resources.framerflow.com/assets/userinterface_overview.gif">
 
-* `Files` - manage and see your project files. Toggle is possible.
-* `Layers` - Understand how your layers are structured and inspect.
-* `Analysis` - Show any recommendation or potential risky parts of your code
-* `REPL` - You can try various thing just as you did in usual browser's console window
-* `Import` - Import assets from Photoshop. Only photoshop is possible.
-* `Note` - Describe brief description about your project.
-* `Share` - Share your prototype with other people. Sign-in required.
+* `Files` - Manage and view your project files. The toggle is possible.
+* `Layers` - Understand how your layers are structured and inspect the layers.
+* `Analysis` - Show any recommendation or potential risky parts of yours code
+* `REPL` - You can try various thing just as you usually did in browser's console window.
+* `Import` - Import assets from Photoshop. 
+* `Note` - Describe a brief description of your project.
+* `Share` - Share your prototype with others. Sign-in required.
 
 ### Release Notes
 N/A
@@ -74,10 +74,10 @@ N/A
 
 Starting a new project is simple and easy.
 
-1. Launch FramerFlow appliaction.
+1. Launch FramerFlow application.
 2. Click File > New Project on the application menu.
-3. Enter project name and location then click OK.
-5. You can see very basic skeleton project code.
+3. Enter a project name and folder location then click 'OK'.
+5. The application generates very basic project skeleton code.
 
 <img src="blank.png" class="lazy" width="824" height="642" data-src="http://resources.framerflow.com/assets/new_project.gif">
 <i></i>

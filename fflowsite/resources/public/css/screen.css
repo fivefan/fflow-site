@@ -1,4 +1,8 @@
 body {
+  background-repeat: no-repeat;
+}
+
+body {
   font-family: "Open Sans", Avenir, Helvetica, sans-serif;
 }
 

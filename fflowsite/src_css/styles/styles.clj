@@ -168,6 +168,12 @@
    ]
   )
 
+(def
+  base-styles
+  [
+   [:body {:background-repeat :no-repeat}]
+   ])
+
 (defstyles
   typography
   [
@@ -598,6 +604,7 @@
 (defstyles
   screen
   [
+   base-styles
    typography
    grids
    utils
