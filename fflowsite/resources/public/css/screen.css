@@ -3417,9 +3417,9 @@ p.small {
 .Hero-video {
   position: absolute;
   left: 0;
-  top: -20%;
-  width: 133%;
-  height: 140%;
+  top: -20% !important;
+  width: 133% !important;
+  height: 140% !important;
 }
 
 .Hero-loveIcon {

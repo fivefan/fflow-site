@@ -284,9 +284,9 @@
                   :margin-bottom (ms 1)}]
    [:.Hero-video {:position :absolute
                   :left     0
-                  :top      (percent -20)
-                  :width    (percent 133)
-                  :height   (percent 140)}]
+                  :top      "-20% !important"
+                  :width    "133% !important"
+                  :height   "140% !important"}]
    [:.Hero-loveIcon {:color   :blue
                      :padding [[0 (ms 0.25)]]}]
    [:.Hero-desc {:font-family serif
