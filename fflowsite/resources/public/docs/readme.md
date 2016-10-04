@@ -84,8 +84,8 @@ Starting a new project should be fairly simple.
 
 ### Notes on generated code
 
-In the beta release some auto generated codes which is in `app.js` are mandatory.
-Two things are most important.
+In the beta release, some of auto generated codes which are part of `app.js` are 
+necessary. Two things are most important.
 
 1. Special comment which starts with `/* @flow */`
 2. `require` auto generated configuration file
