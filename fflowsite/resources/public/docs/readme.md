@@ -178,7 +178,7 @@ Check this.
 no right to change the value. 
 > Try program with `const` as many as you can,
 > your code would be much better in terms of simplicity and robusteness.
-> This is definitely an way to be awesome programmer. 
+> This is definitely an way to be better programmer. 
 
 <img src="blank.png" class="lazy" width="607" height="508" data-src="http://resources.framerflow.com/assets/es6_const.gif">
 
