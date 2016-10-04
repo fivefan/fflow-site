@@ -153,8 +153,9 @@ f1();
 
 
 ### ES6 - Scoped variable
-`let` finally takes care of very bad thing of Javascript.
-Following code is a very subtle problem. It is a source of many bugs.
+`let` finally takes care of one of the notorious scope problem of Javascript.
+The following code has a very subtle bug. `let` introduces local scope 
+concept so you can safely use let scoped variable inside a certain block only.
 
 ```
 var a = "San Francisco";
