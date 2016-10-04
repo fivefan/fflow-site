@@ -117,7 +117,7 @@ such as device type, zoom factor, rotation and background, etc.
 
 
 ## Coding tools
-FramerFlow has decent coding features to help you better.
+FramerFlow has decent coding features to serve you better.
 
 * ES6 with type annotation
 * Modules
