@@ -126,9 +126,14 @@ FramerFlow has decent coding features to serve you better.
 * Flowtype's Static Analysis
 
 ### ES6 - Overview
-ES6 is next version of JavaScript. Its expressive power is same with CoffeeScript
-in terms of simplicity, beauty. By adopting ES6 you can keep similar things
-when you do CoffeeScript codings.
+ES6 is the next version of JavaScript. 
+Its expressive power becomes much better. The simplicity of it was 
+stolen from CoffeeScript. By adopting ES6 you can do the almost 
+same kind of coding in CoffeeScript.
+
+You have to check ES6 Javascript guide for full and complete references. 
+Let's look at what are possible in ES6 briefly. 
+
 
 ### ES6 - Fat Arrow
 `()=>{}`. Fat arrow is very shorthand form to define inline function or anonymous function.
