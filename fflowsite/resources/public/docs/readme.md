@@ -35,12 +35,12 @@ Here's how to get started with FramerFlow
 Download the preview release with the link. After downloads execute it.
 
 > *CAUTION*
-> **Windows platform (64bits)** is required to start use the application. 
+> **Windows (64bits)** is required to start use the application. 
+> Only Windows 10 is tested. 
 >
 
-
-You will see the install processing window. It usually takes around 5~10 minutes.
-You will be ready to get started soon.
+The setup program will install FramerFlow, add the shortcut in the start menu.
+It usually takes around 5~10 minutes. You will be ready to get started soon.
 
 <img src="blank.png" class="lazy" width="472" height="312" data-src="http://resources.framerflow.com/assets/install-spinner.gif">
 
@@ -72,9 +72,9 @@ N/A
 
 ## Start a new project
 
-Starting a new project is simple and easy.
+Starting a new project should be fairly simple.
 
-1. Launch FramerFlow application.
+1. Launch `FramerFlow` application.
 2. Click File > New Project on the application menu.
 3. Enter a project name and folder location then click 'OK'.
 5. The application generates very basic project skeleton code.
@@ -84,7 +84,11 @@ Starting a new project is simple and easy.
 
 ### Notes on generated code
 
-In the preview release some codes are mandatory and special to FramerFlow.
+In the beta release some auto generated codes which is in `app.js` are mandatory.
+Two things are most important.
+1. Special comment which starts with `/* @flow */`
+2. `require` auto generated configuration file
+
 The code starts with special comment.
 
 ```javascript
