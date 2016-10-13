@@ -284,7 +284,10 @@ The module exposes one variable and two functions.
  * The type keywords are pretty obvious. The detail information is available
    at [https://flowtype.org/docs/quick-reference.html#primitives](
    https://flowtype.org/docs/quick-reference.html#primitives)
- 
+
+ <div class="u-marginTop--2ms u-marginBottom--4ms">
+ <img src="/img/autocompletion.jpg">
+ </div>
 
 ### Modules - Node.js
 FramerFlow basically supports node.js module system. Let's start to use `lodash`
