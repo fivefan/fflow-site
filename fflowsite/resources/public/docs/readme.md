@@ -218,9 +218,9 @@ inside your program. Here is simple example.
 
 <img src="blank.png" class="lazy" width="605" height="456" data-src="http://resources.framerflow.com/assets/codingtools_module.gif">
 
-You can create a module file anywhere you want. But usual location is under
-root folder or `modules` folder. If you use module creation ui, the file is
- creaed under `modules` folder.
+Just create a module file anywhere you want. However, usual location is under
+root folder or `modules` folder. If you use module creation ui, the generated 
+module file is generated under `modules` folder.
 
  #### `require`
  In order to use module you should use `require` function.
@@ -240,6 +240,51 @@ when they are set in `module.exports`. The detail and complete guide is here:
 
 * [node.js module documentation](https://nodejs.org/api/modules.html#modules_module_exports)
 * [FlowType module](https://flowtype.org/docs/modules.html) - FramerFlow *only* supports __commonjs__ module system.
+
+#### Support autocompletion
+The exposed functions and variables of a module are usually used by the other 
+part of your prototype. To get  a proper autocompletion in FramerFlow across 
+modules, you have to describe type information for exposed functions and 
+variables. This is a critical step in the overall workflow if you have a plan 
+to use modules in your project. 
+
+Here is a simple example for a module which exposes one variable and one function.
+
+```
+/* @flow */
+
+let helloMsg = "Hello " + Date.now()
+  , id = Date.now();
+  
+function printHello() {
+    console.log(helloMsg);
+}
+function formatHelloMsg(msg: string) : string {
+    return "Hello " + msg; 
+}
+
+module.exports = {
+    id: id,
+    formatHelloMsg: formatHelloMsg,
+    print: printHello
+};
+```
+
+The module starts with special comment. `/* @flow */` is mandatory to enable
+[flowtype](http://www.flowtype.org) support. This simple comment brings
+all the goodness such as autocompletion, type check and any potential code
+defects.
+
+The module exposes one variable and two functions. 
+ 
+ * variable `id` has no type annotation. The type is magically tracked by FlowType.
+   variable do not need to have separate type annotation.
+ * a function has input parameters and return value, the type should be 
+   specified by following `:` with type info. 
+ * The type keywords are pretty obvious. The detail information is available
+   at [https://flowtype.org/docs/quick-reference.html#primitives](
+   https://flowtype.org/docs/quick-reference.html#primitives)
+ 
 
 ### Modules - Node.js
 FramerFlow basically supports node.js module system. Let's start to use `lodash`

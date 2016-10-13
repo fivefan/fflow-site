@@ -5,7 +5,7 @@
  * expects a list of:
  * `<img src="blank.gif" data-src="my_image.png" width="600" height="400" class="lazy">`
  */
-$(function() {
+function installLazyLoading() {
     var $q = function(q, res){
             if (document.querySelectorAll) {
                 res = document.querySelectorAll(q);
@@ -34,6 +34,9 @@ $(function() {
         ;
 
     function loadImage (el, fn) {
+        if(el.__loading)
+            return;
+
         var img = new Image()
             , src = el.getAttribute('data-src');
         img.onload = function() {
@@ -43,8 +46,9 @@ $(function() {
                 el.src = src;
 
             fn? fn() : null;
-        }
+        };
         img.src = src;
+        el.__loading = true;
     }
 
     function elementInViewport(el) {
@@ -77,4 +81,4 @@ $(function() {
     processScroll();
     addEventListener('scroll',processScroll);
 
-});
+}
